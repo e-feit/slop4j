@@ -1,0 +1,11 @@
+package dev.feit.slop4j;
+
+public enum SlopFindingType {
+    BUZZWORD_DENSITY,
+    VAGUE_PHRASE,
+    ABSTRACT_NOUN_DENSITY,
+    LOW_CONCRETENESS,
+    LOW_ACTIONABILITY,
+    REPETITION,
+    OVERCONFIDENCE
+}
