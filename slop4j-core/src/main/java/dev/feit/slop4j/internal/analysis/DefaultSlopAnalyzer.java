@@ -22,56 +22,47 @@ import org.jspecify.annotations.Nullable;
 
 public final class DefaultSlopAnalyzer implements SlopAnalyzer {
 
-    private final List<Language> languages;
-    private final int maxFindingEvidenceLength;
-    private final DictionarySet dictionarySet;
-    private final List<SlopRule> rules;
-    private final DefaultSlopScorer scorer = new DefaultSlopScorer();
+	private final List<Language> languages;
+	private final int maxFindingEvidenceLength;
+	private final DictionarySet dictionarySet;
+	private final List<SlopRule> rules;
+	private final DefaultSlopScorer scorer = new DefaultSlopScorer();
 
-    public DefaultSlopAnalyzer(List<Language> languages, int maxFindingEvidenceLength) {
-        this(languages, maxFindingEvidenceLength, new ResourceDictionaryLoader().load(languages));
-    }
+	public DefaultSlopAnalyzer(List<Language> languages, int maxFindingEvidenceLength) {
+		this(languages, maxFindingEvidenceLength, new ResourceDictionaryLoader().load(languages));
+	}
 
-    DefaultSlopAnalyzer(
-            List<Language> languages, int maxFindingEvidenceLength, DictionarySet dictionarySet) {
-        this.languages = List.copyOf(Objects.requireNonNull(languages, "languages"));
-        this.maxFindingEvidenceLength = maxFindingEvidenceLength;
-        this.dictionarySet = Objects.requireNonNull(dictionarySet, "dictionarySet");
-        this.rules =
-                List.of(
-                        new BuzzwordRule(),
-                        new VaguePhraseRule(),
-                        new AbstractNounRule(),
-                        new ConcreteAnchorRule(),
-                        new ActionabilityRule(),
-                        new RepetitionRule(),
-                        new OverconfidenceRule());
-    }
+	DefaultSlopAnalyzer(List<Language> languages, int maxFindingEvidenceLength, DictionarySet dictionarySet) {
+		this.languages = List.copyOf(Objects.requireNonNull(languages, "languages"));
+		this.maxFindingEvidenceLength = maxFindingEvidenceLength;
+		this.dictionarySet = Objects.requireNonNull(dictionarySet, "dictionarySet");
+		this.rules = List.of(new BuzzwordRule(), new VaguePhraseRule(), new AbstractNounRule(),
+				new ConcreteAnchorRule(), new ActionabilityRule(), new RepetitionRule(), new OverconfidenceRule());
+	}
 
-    @Override
-    public SlopReport analyze(@Nullable String text) {
-        SlopContext context = SlopContext.create(text, dictionarySet);
-        if (context.tokenCount() == 0) {
-            return new SlopReport(
-                    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SlopVerdict.CLEAN, List.of());
-        }
+	@Override
+	public SlopReport analyze(@Nullable String text) {
+		SlopContext context = SlopContext.create(text, dictionarySet);
+		if (context.tokenCount() == 0) {
+			return new SlopReport(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, SlopVerdict.CLEAN, List.of());
+		}
 
-        List<SlopRule.Result> results = new ArrayList<>();
-        for (SlopRule rule : rules) {
-            results.add(rule.analyze(context, maxFindingEvidenceLength));
-        }
-        return scorer.score(context, results);
-    }
+		List<SlopRule.Result> results = new ArrayList<>();
+		for (SlopRule rule : rules) {
+			results.add(rule.analyze(context, maxFindingEvidenceLength));
+		}
+		return scorer.score(context, results);
+	}
 
-    List<Language> languages() {
-        return languages;
-    }
+	List<Language> languages() {
+		return languages;
+	}
 
-    int maxFindingEvidenceLength() {
-        return maxFindingEvidenceLength;
-    }
+	int maxFindingEvidenceLength() {
+		return maxFindingEvidenceLength;
+	}
 
-    DictionarySet dictionarySet() {
-        return dictionarySet;
-    }
+	DictionarySet dictionarySet() {
+		return dictionarySet;
+	}
 }

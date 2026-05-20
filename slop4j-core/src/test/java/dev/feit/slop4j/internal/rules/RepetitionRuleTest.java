@@ -10,34 +10,22 @@ import org.junit.jupiter.api.Test;
 
 class RepetitionRuleTest {
 
-    @Test
-    void detectsRepeatedTrigrams() {
-        String text = "strategic platform value ".repeat(12);
+	@Test
+	void detectsRepeatedTrigrams() {
+		String text = "strategic platform value ".repeat(12);
 
-        SlopRule.Result result =
-                new RepetitionRule()
-                        .analyze(
-                                SlopContext.create(
-                                        text,
-                                        new ResourceDictionaryLoader().load(Language.ENGLISH)),
-                                120);
+		SlopRule.Result result = new RepetitionRule()
+				.analyze(SlopContext.create(text, new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-        assertThat(result.repetitionScore()).isGreaterThanOrEqualTo(0.08);
-        assertThat(result.findings())
-                .extracting(finding -> finding.type())
-                .contains(SlopFindingType.REPETITION);
-    }
+		assertThat(result.repetitionScore()).isGreaterThanOrEqualTo(0.08);
+		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.REPETITION);
+	}
 
-    @Test
-    void ignoresVeryShortTexts() {
-        SlopRule.Result result =
-                new RepetitionRule()
-                        .analyze(
-                                SlopContext.create(
-                                        "same same same",
-                                        new ResourceDictionaryLoader().load(Language.ENGLISH)),
-                                120);
+	@Test
+	void ignoresVeryShortTexts() {
+		SlopRule.Result result = new RepetitionRule().analyze(
+				SlopContext.create("same same same", new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-        assertThat(result.repetitionScore()).isZero();
-    }
+		assertThat(result.repetitionScore()).isZero();
+	}
 }

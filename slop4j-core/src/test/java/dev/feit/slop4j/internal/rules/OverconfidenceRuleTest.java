@@ -10,19 +10,13 @@ import org.junit.jupiter.api.Test;
 
 class OverconfidenceRuleTest {
 
-    @Test
-    void detectsClaimMarkersWithoutEvidence() {
-        SlopRule.Result result =
-                new OverconfidenceRule()
-                        .analyze(
-                                SlopContext.create(
-                                        "This is always guaranteed and obviously proven.",
-                                        new ResourceDictionaryLoader().load(Language.ENGLISH)),
-                                120);
+	@Test
+	void detectsClaimMarkersWithoutEvidence() {
+		SlopRule.Result result = new OverconfidenceRule()
+				.analyze(SlopContext.create("This is always guaranteed and obviously proven.",
+						new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-        assertThat(result.overconfidenceScore()).isGreaterThan(0.0);
-        assertThat(result.findings())
-                .extracting(finding -> finding.type())
-                .contains(SlopFindingType.OVERCONFIDENCE);
-    }
+		assertThat(result.overconfidenceScore()).isGreaterThan(0.0);
+		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.OVERCONFIDENCE);
+	}
 }

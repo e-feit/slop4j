@@ -11,20 +11,13 @@ import org.junit.jupiter.api.Test;
 
 class VaguePhraseRuleTest {
 
-    @Test
-    void detectsPhrasesAcrossMergedLanguages() {
-        SlopRule.Result result =
-                new VaguePhraseRule()
-                        .analyze(
-                                SlopContext.create(
-                                        "It depends. In many cases kommt darauf an.",
-                                        new ResourceDictionaryLoader()
-                                                .load(List.of(Language.ENGLISH, Language.GERMAN))),
-                                120);
+	@Test
+	void detectsPhrasesAcrossMergedLanguages() {
+		SlopRule.Result result = new VaguePhraseRule()
+				.analyze(SlopContext.create("It depends. In many cases kommt darauf an.",
+						new ResourceDictionaryLoader().load(List.of(Language.ENGLISH, Language.GERMAN))), 120);
 
-        assertThat(result.vaguePhraseDensity()).isGreaterThan(0.0);
-        assertThat(result.findings())
-                .extracting(finding -> finding.type())
-                .contains(SlopFindingType.VAGUE_PHRASE);
-    }
+		assertThat(result.vaguePhraseDensity()).isGreaterThan(0.0);
+		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.VAGUE_PHRASE);
+	}
 }

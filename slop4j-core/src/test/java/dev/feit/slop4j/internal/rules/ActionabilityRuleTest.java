@@ -10,36 +10,23 @@ import org.junit.jupiter.api.Test;
 
 class ActionabilityRuleTest {
 
-    @Test
-    void recognizesActiveVerbsAndCommands() {
-        SlopRule.Result result =
-                new ActionabilityRule()
-                        .analyze(
-                                SlopContext.create(
-                                        """
-                                        Create the service. Configure Redis. Deploy and validate it.
-                                        mvn test
-                                        """,
-                                        new ResourceDictionaryLoader().load(Language.ENGLISH)),
-                                120);
+	@Test
+	void recognizesActiveVerbsAndCommands() {
+		SlopRule.Result result = new ActionabilityRule().analyze(SlopContext.create("""
+				Create the service. Configure Redis. Deploy and validate it.
+				mvn test
+				""", new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-        assertThat(result.actionabilityScore()).isGreaterThan(0.5);
-    }
+		assertThat(result.actionabilityScore()).isGreaterThan(0.5);
+	}
 
-    @Test
-    void emitsFindingOnlyForLongLowActionabilityText() {
-        String longText = "transformation ".repeat(90);
+	@Test
+	void emitsFindingOnlyForLongLowActionabilityText() {
+		String longText = "transformation ".repeat(90);
 
-        SlopRule.Result result =
-                new ActionabilityRule()
-                        .analyze(
-                                SlopContext.create(
-                                        longText,
-                                        new ResourceDictionaryLoader().load(Language.ENGLISH)),
-                                120);
+		SlopRule.Result result = new ActionabilityRule()
+				.analyze(SlopContext.create(longText, new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-        assertThat(result.findings())
-                .extracting(finding -> finding.type())
-                .contains(SlopFindingType.LOW_ACTIONABILITY);
-    }
+		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.LOW_ACTIONABILITY);
+	}
 }

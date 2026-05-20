@@ -25,7 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.10.3</junit.jupiter.version>
         <assertj.version>3.26.3</assertj.version>
-        <google-java-format.version>1.22.0</google-java-format.version>
+        <google-java-format.version>1.24.0</google-java-format.version>
         <jspecify.version>1.0.0</jspecify.version>
         <snakeyaml.version>2.6</snakeyaml.version>
         <jacoco.version>0.8.14</jacoco.version>
@@ -95,10 +95,11 @@
                     <version>${spotless.version}</version>
                     <configuration>
                         <java>
-                            <googleJavaFormat>
-                                <version>${google-java-format.version}</version>
-                                <style>AOSP</style>
-                            </googleJavaFormat>
+                            <eclipse>
+                                <version>4.31</version>
+                            </eclipse>
+                            <trimTrailingWhitespace/>
+                            <endWithNewline/>
                         </java>
                     </configuration>
                 </plugin>

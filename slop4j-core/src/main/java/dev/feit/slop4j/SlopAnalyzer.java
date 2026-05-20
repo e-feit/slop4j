@@ -4,13 +4,13 @@ import org.jspecify.annotations.Nullable;
 
 public interface SlopAnalyzer {
 
-    SlopReport analyze(@Nullable String text);
+	SlopReport analyze(@Nullable String text);
 
-    static SlopReport analyzeText(String text) {
-        return builder().build().analyze(text);
-    }
+	static SlopReport analyzeText(String text) {
+		return builder().build().analyze(text);
+	}
 
-    static SlopAnalyzerBuilder builder() {
-        return new SlopAnalyzerBuilder();
-    }
+	static SlopAnalyzerBuilder builder() {
+		return new SlopAnalyzerBuilder();
+	}
 }

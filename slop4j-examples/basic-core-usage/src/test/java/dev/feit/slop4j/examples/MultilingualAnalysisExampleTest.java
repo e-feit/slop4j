@@ -7,17 +7,14 @@ import org.junit.jupiter.api.Test;
 
 class MultilingualAnalysisExampleTest {
 
-    @Test
-    void analyzesGermanTextWhenGermanDictionaryIsEnabled() {
-        SlopReport report =
-                new MultilingualAnalysisExample()
-                        .analyze(
-                                """
-                                Unsere KI-gestützte Plattform ermöglicht eine nahtlose und skalierbare Transformation.
-                                Sie schafft Synergie, optimiert Innovation und verbessert die Effizienz.
-                                """);
+	@Test
+	void analyzesGermanTextWhenGermanDictionaryIsEnabled() {
+		SlopReport report = new MultilingualAnalysisExample().analyze("""
+				Unsere KI-gestützte Plattform ermöglicht eine nahtlose und skalierbare Transformation.
+				Sie schafft Synergie, optimiert Innovation und verbessert die Effizienz.
+				""");
 
-        assertThat(report.slopScore()).isGreaterThan(45.0);
-        assertThat(report.findings()).isNotEmpty();
-    }
+		assertThat(report.slopScore()).isGreaterThan(45.0);
+		assertThat(report.findings()).isNotEmpty();
+	}
 }
