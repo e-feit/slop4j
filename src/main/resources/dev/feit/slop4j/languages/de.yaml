@@ -60,9 +60,12 @@ weaselWords:
   - sollte
   - würde
 activeVerbs:
+  - erstelle
   - erstellen
+  - speichere
   - löschen
   - ersetzen
+  - versioniere
   - konfigurieren
   - aktivieren
   - deaktivieren
@@ -73,6 +76,7 @@ activeVerbs:
   - validieren
   - testen
   - messen
+  - überwache
   - loggen
   - überwachen
   - indizieren
@@ -93,6 +97,9 @@ concreteTerms:
   - maven
   - gradle
   - spring
+  - boot
+  - flyway
+  - micrometer
   - wildfly
   - angular
   - typescript

@@ -6,6 +6,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
 * **The Joke is the Discrepancty:** `slop4j` is a satirical "AI Output Governance Framework" that uses simple, rule-based heuristics instead of AI.
 * **Keep Code/Docs Overly Serious:** All public APIs, JavaDocs, and the `README.md` must sound ultra-professional, enterprise-grade, and dry.
 * **No Jokes in Code:** Never write jokes, easter eggs, or sarcastic remarks in code comments, commit messages, or PR descriptions. The humor must only emerge from the serious implementation of ridiculous concepts (e.g., `BOARD_APPROVED_SLOP`, `DANGEROUSLY_USEFUL`).
+* **README Language Synchronization:** `README.md` is the primary English README and `README_DE.md` is the German counterpart. Always keep both files strictly synchronized. Any content change in one README must be reflected in the other README in the same change.
 
 ## 2. Technical Constraints (Do Not Violate)
 * **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.

@@ -1,8 +1,10 @@
 package dev.feit.slop4j;
 
+import org.jspecify.annotations.Nullable;
+
 public interface SlopAnalyzer {
 
-    SlopReport analyze(String text);
+    SlopReport analyze(@Nullable String text);
 
     static SlopReport analyzeText(String text) {
         return builder().build().analyze(text);
