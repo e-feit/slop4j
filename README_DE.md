@@ -2,6 +2,10 @@
 
 [English](./README.md) | [Deutsch](./README_DE.md)
 
+<p align="center">
+  <img src="img/slop4j.png" alt="slop4j logo" width="240">
+</p>
+
 Enterprise-grade AI-Slop-Erkennung für JVM-basierte Transformationsnarrative.
 
 ## Was es macht
