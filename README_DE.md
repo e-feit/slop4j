@@ -22,13 +22,9 @@ Inhalten verbunden sind.
 
 ## Installation
 
-```xml
-<dependency>
-    <groupId>dev.feit</groupId>
-    <artifactId>slop4j-core</artifactId>
-    <version>0.1.0</version>
-</dependency>
-```
+`slop4j` ist noch nicht auf Maven Central veröffentlicht. Bis ein Release
+verfügbar ist, sollte der lokale Source-Checkout statt einer Maven-Dependency
+verwendet werden.
 
 Das Java-Package und der automatische Modulname lauten beide
 `dev.feit.slop4j`.
@@ -55,16 +51,8 @@ System.out.println(report.findings());
 
 ## AssertJ Assertions
 
-Für Tests kann `slop4j-assertj` mit Test-Scope eingebunden werden:
-
-```xml
-<dependency>
-    <groupId>dev.feit</groupId>
-    <artifactId>slop4j-assertj</artifactId>
-    <version>0.1.0</version>
-    <scope>test</scope>
-</dependency>
-```
+Für Tests stellt das Modul `slop4j-assertj` AssertJ-Assertions bereit, wenn der
+Source-Checkout lokal verwendet wird.
 
 Das AssertJ-Modul basiert auf `slop4j-core`. Es führt keine eigene
 Analyse-Logik ein, sondern bildet Core-`SlopReport`-Werte auf deterministische
@@ -93,8 +81,9 @@ assertThatSlop(strategyDeck)
 
 ## Unterstützte Sprachen
 
-Step 1 unterstützt englische und deutsche Wörterbücher. Der Standard-Analyzer
-verwendet Englisch. Weitere Sprachen können explizit konfiguriert werden:
+Der Analyzer unterstützt englische und deutsche Wörterbücher. Der
+Standard-Analyzer verwendet Englisch. Weitere Sprachen können explizit
+konfiguriert werden:
 
 ```java
 SlopAnalyzer analyzer = SlopAnalyzer.builder()

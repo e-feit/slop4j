@@ -20,13 +20,8 @@ associated with vague, generic or overconfident AI-generated content.
 
 ## Installation
 
-```xml
-<dependency>
-    <groupId>dev.feit</groupId>
-    <artifactId>slop4j-core</artifactId>
-    <version>0.1.0</version>
-</dependency>
-```
+`slop4j` is not published to Maven Central yet. Until a release is available,
+use the source checkout locally instead of declaring a Maven dependency.
 
 The Java package and automatic module name are both `dev.feit.slop4j`.
 
@@ -52,16 +47,8 @@ System.out.println(report.findings());
 
 ## AssertJ Assertions
 
-For tests, add `slop4j-assertj` with test scope:
-
-```xml
-<dependency>
-    <groupId>dev.feit</groupId>
-    <artifactId>slop4j-assertj</artifactId>
-    <version>0.1.0</version>
-    <scope>test</scope>
-</dependency>
-```
+For tests, the `slop4j-assertj` module provides AssertJ assertions when using
+the source checkout locally.
 
 The AssertJ module is based on `slop4j-core`. It does not introduce separate
 analysis logic; it turns core `SlopReport` values into deterministic test
@@ -90,8 +77,8 @@ assertThatSlop(strategyDeck)
 
 ## Supported Languages
 
-Step 1 supports English and German dictionaries. The default analyzer uses
-English. Additional languages can be configured explicitly:
+The analyzer supports English and German dictionaries. The default analyzer
+uses English. Additional languages can be configured explicitly:
 
 ```java
 SlopAnalyzer analyzer = SlopAnalyzer.builder()
