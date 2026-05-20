@@ -33,6 +33,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
 
 ## 4. Verification Commands & Pre-Push Requirements
 * **Strict Verification:** Before pushing to a remote repository, you MUST ensure that all tests pass AND the code is properly formatted. A push is only permitted if `mvn clean test` and `mvn spotless:check` are green.
+* **No Auto-Commit/Push:** NEVER commit or push changes unless explicitly instructed by the user.
 * **Build and Test:** `mvn clean test`
 * **Format Code:** `mvn spotless:apply`
 * **Verify Formatting:** `mvn spotless:check`
