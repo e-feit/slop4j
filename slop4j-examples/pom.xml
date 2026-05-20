@@ -18,5 +18,6 @@
 
     <modules>
         <module>basic-core-usage</module>
+        <module>assertj-usage</module>
     </modules>
 </project>
