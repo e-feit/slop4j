@@ -1,0 +1,128 @@
+buzzwords:
+  - agentisch
+  - autonom
+  - ki-gestützt
+  - ki-nativ
+  - enterprise-grade
+  - skalierbar
+  - nahtlos
+  - robust
+  - transformativ
+  - transformation
+  - hebeln
+  - freischalten
+  - synergie
+  - orchestrierung
+  - next-generation
+  - zukunftssicher
+  - reibungslos
+  - ganzheitlich
+  - innovativ
+  - disruptiv
+abstractNouns:
+  - transformation
+  - innovation
+  - produktivität
+  - effizienz
+  - exzellenz
+  - befähigung
+  - ausrichtung
+  - strategie
+  - reise
+  - fähigkeit
+  - erlebnis
+  - orchestrierung
+  - optimierung
+  - modernisierung
+  - resilienz
+  - agilität
+vaguePhrases:
+  - kommt darauf an
+  - in vielen fällen
+  - typischerweise
+  - generell
+  - kann helfen
+  - könnte helfen
+  - best practice
+  - bewährte methode
+  - moderne systeme
+  - moderne anwendungen
+  - wo sinnvoll
+  - abhängig von den anforderungen
+weaselWords:
+  - typischerweise
+  - generell
+  - normalerweise
+  - oft
+  - manchmal
+  - kann
+  - könnte
+  - sollte
+  - würde
+activeVerbs:
+  - erstellen
+  - löschen
+  - ersetzen
+  - konfigurieren
+  - aktivieren
+  - deaktivieren
+  - ausführen
+  - deployen
+  - zurückrollen
+  - migrieren
+  - validieren
+  - testen
+  - messen
+  - loggen
+  - überwachen
+  - indizieren
+  - cachen
+  - extrahieren
+  - refaktorieren
+  - aufteilen
+concreteTerms:
+  - postgresql
+  - mysql
+  - oracle
+  - redis
+  - kafka
+  - rabbitmq
+  - kubernetes
+  - helm
+  - docker
+  - maven
+  - gradle
+  - spring
+  - wildfly
+  - angular
+  - typescript
+  - java
+  - gitlab
+  - pipeline
+  - container
+  - pod
+  - deployment
+  - statefulset
+  - readiness
+  - liveness
+  - latenz
+  - timeout
+  - transaktion
+  - index
+  - cache
+  - schema
+  - migration
+  - endpoint
+  - controller
+  - repository
+  - service
+claimMarkers:
+  - immer
+  - nie
+  - garantiert
+  - bewiesen
+  - zweifellos
+  - klar
+  - offensichtlich
+  - state-of-the-art
+  - best-in-class

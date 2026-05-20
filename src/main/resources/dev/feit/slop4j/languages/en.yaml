@@ -1,0 +1,131 @@
+buzzwords:
+  - agentic
+  - autonomous
+  - ai-powered
+  - ai-native
+  - enterprise-grade
+  - scalable
+  - seamless
+  - robust
+  - transformative
+  - transformation
+  - leverage
+  - unlock
+  - synergy
+  - orchestration
+  - next-generation
+  - future-proof
+  - frictionless
+  - holistic
+  - innovative
+  - disruptive
+  - cutting-edge
+abstractNouns:
+  - transformation
+  - innovation
+  - productivity
+  - efficiency
+  - excellence
+  - enablement
+  - alignment
+  - strategy
+  - journey
+  - capability
+  - experience
+  - orchestration
+  - optimization
+  - modernization
+  - resilience
+  - agility
+vaguePhrases:
+  - it depends
+  - in many cases
+  - typically
+  - generally
+  - can help
+  - may help
+  - best practice
+  - best practices
+  - modern systems
+  - modern applications
+  - where appropriate
+  - depending on your needs
+weaselWords:
+  - typically
+  - generally
+  - usually
+  - often
+  - sometimes
+  - may
+  - might
+  - could
+  - should
+activeVerbs:
+  - create
+  - delete
+  - replace
+  - configure
+  - enable
+  - disable
+  - run
+  - execute
+  - deploy
+  - rollback
+  - migrate
+  - validate
+  - test
+  - measure
+  - log
+  - monitor
+  - index
+  - cache
+  - inject
+  - refactor
+  - split
+  - extract
+concreteTerms:
+  - postgresql
+  - mysql
+  - oracle
+  - redis
+  - kafka
+  - rabbitmq
+  - kubernetes
+  - helm
+  - docker
+  - maven
+  - gradle
+  - spring
+  - wildfly
+  - angular
+  - typescript
+  - java
+  - gitlab
+  - pipeline
+  - container
+  - pod
+  - deployment
+  - statefulset
+  - readiness
+  - liveness
+  - latency
+  - timeout
+  - transaction
+  - index
+  - cache
+  - schema
+  - migration
+  - endpoint
+  - controller
+  - repository
+  - service
+claimMarkers:
+  - always
+  - never
+  - guaranteed
+  - proven
+  - undoubtedly
+  - clearly
+  - obviously
+  - state-of-the-art
+  - best-in-class

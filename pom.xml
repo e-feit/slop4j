@@ -19,6 +19,7 @@
         <assertj.version>3.26.3</assertj.version>
         <google-java-format.version>1.22.0</google-java-format.version>
         <jspecify.version>1.0.0</jspecify.version>
+        <snakeyaml.version>2.6</snakeyaml.version>
     </properties>
 
     <dependencies>
@@ -27,6 +28,11 @@
             <artifactId>jspecify</artifactId>
             <version>${jspecify.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

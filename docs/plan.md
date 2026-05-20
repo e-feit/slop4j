@@ -42,7 +42,7 @@ Die Library soll folgende Eigenschaften haben:
 - vollständig offline lauffähig
 - deterministisch
 - schnell genug für Dokumentations- und LLM-Output-Analyse
-- keine Runtime-Abhängigkeiten im Core, sofern vermeidbar
+- nur minimale Runtime-Abhängigkeiten im Core; SnakeYAML ist für YAML-basierte Sprachdaten zugelassen
 - einfache öffentliche API
 - intern regelbasiert und erweiterbar
 - sprachunterstützend über Ressourcen-Dateien
@@ -151,8 +151,8 @@ slop4j/
           OverconfidenceRule.java
       resources/
         dev/feit/slop4j/languages/
-          en.properties
-          de.properties
+          en.yaml
+          de.yaml
     test/
       java/
         dev/feit/slop4j/
@@ -370,49 +370,79 @@ Die Sprachdaten sollen nicht im Java-Code hartcodiert sein, sondern aus Ressourc
 Ziel:
 
 ```text
-src/main/resources/dev/feit/slop4j/languages/en.properties
-src/main/resources/dev/feit/slop4j/languages/de.properties
+src/main/resources/dev/feit/slop4j/languages/en.yaml
+src/main/resources/dev/feit/slop4j/languages/de.yaml
 ```
 
-#### 4.5.1 Format der Properties-Dateien
+#### 4.5.1 Format der YAML-Dateien
 
-Ein einfaches `properties`-Format reicht für Step 1.
+Ein einfaches YAML-Format reicht für Step 1. Die Core-Library nutzt dafür `org.yaml:snakeyaml`.
 
-Beispiel `en.properties`:
+Beispiel `en.yaml`:
 
-```properties
-buzzwords=agentic,autonomous,ai-powered,ai-native,enterprise-grade,scalable,seamless,robust,transformative,transformation,leverage,unlock,synergy,orchestration,next-generation,future-proof,frictionless,holistic,innovative,disruptive,cutting-edge
-abstractNouns=transformation,innovation,productivity,efficiency,excellence,enablement,alignment,strategy,journey,capability,experience,orchestration,optimization,modernization,resilience,agility
-vaguePhrases=it depends|in many cases|typically|generally|can help|may help|best practice|best practices|modern systems|modern applications|where appropriate|depending on your needs
-weaselWords=typically,generally,usually,often,sometimes,may,might,could,should
-activeVerbs=create,delete,replace,configure,enable,disable,run,execute,deploy,rollback,migrate,validate,test,measure,log,monitor,index,cache,inject,refactor,split,extract
-concreteTerms=postgresql,mysql,oracle,redis,kafka,rabbitmq,kubernetes,helm,docker,maven,gradle,spring,wildfly,angular,typescript,java,gitlab,pipeline,container,pod,deployment,statefulset,readiness,liveness,latency,timeout,transaction,index,cache,schema,migration,endpoint,controller,repository,service
-claimMarkers=always,never,guaranteed,proven,undoubtedly,clearly,obviously,state-of-the-art,best-in-class
+```yaml
+buzzwords:
+  - agentic
+  - autonomous
+  - ai-powered
+abstractNouns:
+  - transformation
+  - innovation
+vaguePhrases:
+  - it depends
+  - in many cases
+weaselWords:
+  - typically
+  - generally
+activeVerbs:
+  - create
+  - configure
+concreteTerms:
+  - java
+  - maven
+claimMarkers:
+  - always
+  - guaranteed
 ```
 
-Beispiel `de.properties`:
+Beispiel `de.yaml`:
 
-```properties
-buzzwords=agentisch,autonom,ki-gestützt,ki-nativ,enterprise-grade,skalierbar,nahtlos,robust,transformativ,transformation,hebeln,freischalten,synergie,orchestrierung,next-generation,zukunftssicher,reibungslos,ganzheitlich,innovativ,disruptiv
-abstractNouns=transformation,innovation,produktivität,effizienz,exzellenz,befähigung,ausrichtung,strategie,reise,fähigkeit,erlebnis,orchestrierung,optimierung,modernisierung,resilienz,agilität
-vaguePhrases=kommt darauf an|in vielen fällen|typischerweise|generell|kann helfen|könnte helfen|best practice|bewährte methode|moderne systeme|moderne anwendungen|wo sinnvoll|abhängig von den anforderungen
-weaselWords=typischerweise,generell,normalerweise,oft,manchmal,kann,könnte,sollte,würde
-activeVerbs=erstellen,löschen,ersetzen,konfigurieren,aktivieren,deaktivieren,ausführen,deployen,zurückrollen,migrieren,validieren,testen,messen,loggen,überwachen,indizieren,cachen,extrahieren,refaktorieren,aufteilen
-concreteTerms=postgresql,mysql,oracle,redis,kafka,rabbitmq,kubernetes,helm,docker,maven,gradle,spring,wildfly,angular,typescript,java,gitlab,pipeline,container,pod,deployment,statefulset,readiness,liveness,latenz,timeout,transaktion,index,cache,schema,migration,endpoint,controller,repository,service
-claimMarkers=immer,nie,garantiert,bewiesen,zweifellos,klar,offensichtlich,state-of-the-art,best-in-class
+```yaml
+buzzwords:
+  - agentisch
+  - autonom
+  - ki-gestützt
+abstractNouns:
+  - transformation
+  - innovation
+vaguePhrases:
+  - kommt darauf an
+  - in vielen fällen
+weaselWords:
+  - typischerweise
+  - generell
+activeVerbs:
+  - erstellen
+  - konfigurieren
+concreteTerms:
+  - java
+  - maven
+claimMarkers:
+  - immer
+  - garantiert
 ```
 
-#### 4.5.2 Warum Properties statt JSON oder YAML?
+#### 4.5.2 Warum YAML?
 
-Properties sind für Step 1 ausreichend:
+YAML ist für Step 1 ausreichend strukturiert und bleibt für Wörterlisten gut lesbar:
 
-- keine zusätzliche Parser-Abhängigkeit
-- per JDK direkt ladbar
+- weit verbreitete Java-Unterstützung durch SnakeYAML
+- Listen müssen nicht in kommagetrennte Strings kodiert werden
 - leicht testbar
 - einfach zu überschauen
 - ausreichend für kleine Wörterlisten
 
-Nachteil: Komplexere Datenstrukturen werden unhandlich. Für Step 1 ist das akzeptabel.
+Nachteil: Es entsteht eine kleine Runtime-Abhängigkeit. Für die Pflege zweisprachiger Sprachdaten ist das akzeptiert.
 
 #### 4.5.3 Laden der Dictionaries
 
@@ -437,7 +467,7 @@ Loader:
 final class ResourceDictionaryLoader {
 
     DictionarySet load(Collection<Language> languages) {
-        // Für jede Sprache die passende properties-Datei laden.
+        // Für jede Sprache die passende YAML-Datei laden.
         // Mengen zusammenführen.
         // Alles normalisieren auf lowercase(Locale.ROOT).
         // Duplikate entfernen.
@@ -843,8 +873,8 @@ Der Sonderfall ist absichtlich satirisch und sollte im README prominent auftauch
 - Tokenizer erkennt Wörter mit Bindestrich
 - Tokenizer unterstützt Umlaute
 - Satzsplit funktioniert ausreichend
-- Ressourcenloader lädt `en.properties`
-- Ressourcenloader lädt `de.properties`
+- Ressourcenloader lädt `en.yaml`
+- Ressourcenloader lädt `de.yaml`
 - Ressourcenloader merged mehrere Sprachen
 - Ressourcenloader normalisiert auf lowercase
 - Ressourcenloader entfernt leere Einträge
@@ -995,7 +1025,7 @@ Step 1 ist fertig, wenn:
 
 - `slop4j-core` per Maven gebaut werden kann
 - die öffentliche API stabil genug für README-Beispiele ist
-- `en.properties` und `de.properties` geladen werden
+- `en.yaml` und `de.yaml` geladen werden
 - Builder eine oder mehrere Sprachen akzeptiert
 - Analyzer leere und null-nahe Eingaben robust behandelt
 - alle Kernregeln implementiert sind
@@ -1462,8 +1492,8 @@ Noch keine komplexe Logik.
 
 ### Schritt 1.3: Ressourcen-Dateien anlegen
 
-- `en.properties`
-- `de.properties`
+- `en.yaml`
+- `de.yaml`
 
 Zunächst kleine, kuratierte Listen. Nicht zu viele Begriffe. Lieber präzise starten und später erweitern.
 
