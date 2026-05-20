@@ -24,6 +24,11 @@
                 <artifactId>slop4j-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>dev.feit</groupId>
+                <artifactId>slop4j-assertj</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- External Dependencies: Configuration & Metadata -->
             <dependency>

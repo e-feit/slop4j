@@ -46,6 +46,44 @@ System.out.println(report.verdict());
 System.out.println(report.findings());
 ```
 
+## AssertJ Assertions
+
+For tests, add `slop4j-assertj` with test scope:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-assertj</artifactId>
+    <version>0.1.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+The AssertJ module is based on `slop4j-core`. It does not introduce separate
+analysis logic; it turns core `SlopReport` values into deterministic test
+conditions.
+
+```java
+import dev.feit.slop4j.Language;
+
+import static dev.feit.slop4j.assertj.SlopAssertions.assertThatSlop;
+
+assertThatSlop(readme, Language.ENGLISH, Language.GERMAN)
+    .hasSlopScoreBelow(40.0)
+    .hasActionabilityScoreAbove(0.5)
+    .containsConcreteDetails();
+```
+
+Convenience methods are documented aliases over score, verdict and finding
+conditions:
+
+```java
+assertThatSlop(strategyDeck)
+    .isBoardDeckReady()
+    .containsNoImplementationDetails()
+    .maximizesPlausibleDeniability();
+```
+
 ## Supported Languages
 
 Step 1 supports English and German dictionaries. The default analyzer uses
