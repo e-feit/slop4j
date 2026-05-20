@@ -25,14 +25,19 @@ maven test:
   image: maven:3.9-eclipse-temurin-17
   stage: test
   <<: *maven_cache
+  coverage: '/Total line coverage:\s*([0-9]+(?:\.[0-9]+)?)%/'
   script:
     - mvn --batch-mode clean verify
+    - awk -f scripts/gitlab-coverage.awk $(find . -path "*/target/site/jacoco/jacoco.csv")
   artifacts:
     when: always
     reports:
       junit:
         - "**/target/surefire-reports/TEST-*.xml"
         - "**/target/failsafe-reports/TEST-*.xml"
+      coverage_report:
+        coverage_format: jacoco
+        path: "**/target/site/jacoco/jacoco.xml"
     paths:
       - "**/target/surefire-reports"
       - "**/target/failsafe-reports"
