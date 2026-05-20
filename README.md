@@ -45,6 +45,14 @@ System.out.println(report.verdict());
 System.out.println(report.findings());
 ```
 
+For the input shown above, the output would be similar to:
+
+```text
+56.4
+TOTAL_CORPORATE_NOTHINGNESS
+[SlopFinding[type=BUZZWORD_DENSITY, severity=WARNING, message=Buzzword density is suspiciously high., evidence=leverage, agentic, unlock, seamless, enterprise-grade, transformation]]
+```
+
 ## AssertJ Assertions
 
 For tests, the `slop4j-assertj` module provides AssertJ assertions when using
