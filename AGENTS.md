@@ -31,8 +31,8 @@ This guide helps future agent sessions understand the non-obvious architecture c
 * **Sentence Splitting:** Use `text.split("(?<=[.!?])\\s+")`.
 * **Length Gating:** Short texts (under 80 tokens) must not be fully penalized for low evidence, low actionability, or low concreteness. Apply a scaling factor: `lengthFactor = Math.min(1.0, Math.max(0.0, tokenCount / 80.0))` to these penalties.
 
-## 4. Verification Commands
-Once the Maven structure is initialized, use these commands:
+## 4. Verification Commands & Pre-Push Requirements
+* **Strict Verification:** Before pushing to a remote repository, you MUST ensure that all tests pass AND the code is properly formatted. A push is only permitted if `mvn clean test` and `mvn spotless:check` are green.
 * **Build and Test:** `mvn clean test`
 * **Format Code:** `mvn spotless:apply`
 * **Verify Formatting:** `mvn spotless:check`
