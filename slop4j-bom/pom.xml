@@ -18,10 +18,38 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Slop4j Modules -->
             <dependency>
                 <groupId>dev.feit</groupId>
                 <artifactId>slop4j-core</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- External Dependencies: Configuration & Metadata -->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jspecify</groupId>
+                <artifactId>jspecify</artifactId>
+                <version>${jspecify.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Standardized Testing Stack -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
