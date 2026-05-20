@@ -40,7 +40,12 @@ class SlopAnalyzerTest {
 
         assertThat(report.slopScore()).isGreaterThanOrEqualTo(65.0);
         assertThat(report.verdict())
-                .isIn(SlopVerdict.LINKEDIN_READY, SlopVerdict.BOARD_APPROVED_SLOP);
+                .isIn(
+                        SlopVerdict.LINKEDIN_READY,
+                        SlopVerdict.PREMIUM_POLISHED_GARBAGE,
+                        SlopVerdict.BOARD_APPROVED_SLOP,
+                        SlopVerdict.GARBAGE_IN_SLOP_OUT,
+                        SlopVerdict.CERTIFIED_BRAINLESS_SLOP);
         assertThat(report.findings())
                 .extracting(SlopFinding::type)
                 .contains(

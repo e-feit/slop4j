@@ -20,6 +20,14 @@ buzzwords:
   - innovative
   - disruptive
   - cutting-edge
+  - tapestry
+  - realm
+  - multifaceted
+  - ever-evolving
+  - pivotal
+  - groundbreaking
+  - game-changing
+  - mission-critical
 abstractNouns:
   - transformation
   - innovation
@@ -50,6 +58,15 @@ vaguePhrases:
   - modern applications
   - where appropriate
   - depending on your needs
+  - at the heart of
+  - in the realm of
+  - a testament to
+  - look no further
+  - let's delve deeper
+  - delve into
+  - I hope this email finds you well
+  - in today's fast-paced world
+  - it's important to remember
 weaselWords:
   - typically
   - generally
@@ -85,6 +102,14 @@ activeVerbs:
   - refactor
   - split
   - extract
+  - delve
+  - embrace
+  - foster
+  - underscore
+  - elevate
+  - navigate
+  - reimagine
+  - empower
 concreteTerms:
   - postgresql
   - mysql

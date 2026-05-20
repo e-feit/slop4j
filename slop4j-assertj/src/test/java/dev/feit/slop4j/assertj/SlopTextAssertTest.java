@@ -70,7 +70,7 @@ class SlopTextAssertTest {
         SlopAnalyzer analyzer =
                 text ->
                         new SlopReport(
-                                88.0,
+                                98.0,
                                 0.4,
                                 0.5,
                                 0.1,
@@ -78,9 +78,13 @@ class SlopTextAssertTest {
                                 0.1,
                                 0.0,
                                 0.0,
-                                SlopVerdict.BOARD_APPROVED_SLOP,
+                                SlopVerdict.CERTIFIED_BRAINLESS_SLOP,
                                 List.of());
 
-        assertThatSlop("ignored", analyzer).soundsLikeLinkedInPost().isInsufficientlyActionable();
+        assertThatSlop("ignored", analyzer)
+                .soundsLikeLinkedInPost()
+                .isInsufficientlyActionable()
+                .isBrainlessSlop()
+                .isBoardDeckReady();
     }
 }

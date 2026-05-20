@@ -19,6 +19,12 @@ buzzwords:
   - ganzheitlich
   - innovativ
   - disruptiv
+  - wandteppich
+  - facettenreich
+  - wegweisend
+  - bahnbrechend
+  - missionskritisch
+  - game-changing
 abstractNouns:
   - transformation
   - innovation
@@ -49,6 +55,15 @@ vaguePhrases:
   - moderne anwendungen
   - wo sinnvoll
   - abhängig von den anforderungen
+  - im herzen von
+  - im reich der
+  - ein zeugnis für
+  - suchen sie nicht weiter
+  - lassen sie uns tiefer eintauchen
+  - eintauchen in
+  - ich hoffe, diese e-mail erreicht sie wohlbehalten
+  - in der heutigen schnelllebigen welt
+  - es ist wichtig zu bedenken
 weaselWords:
   - typischerweise
   - generell
@@ -84,6 +99,14 @@ activeVerbs:
   - extrahieren
   - refaktorieren
   - aufteilen
+  - eintauchen
+  - umarmen
+  - fördern
+  - unterstreichen
+  - heben
+  - navigieren
+  - neu denken
+  - befähigen
 concreteTerms:
   - postgresql
   - mysql

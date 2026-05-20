@@ -195,9 +195,21 @@ public final class SlopTextAssert extends AbstractAssert<SlopTextAssert, String>
         return this;
     }
 
-    /** Requires verdict {@code BOARD_APPROVED_SLOP} or slop score at least {@code 85.0}. */
+    /** Requires verdict {@code BOARD_APPROVED_SLOP} or higher slop severity. */
     public SlopTextAssert isBoardDeckReady() {
         reportAssert().isBoardDeckReady();
+        return this;
+    }
+
+    /** Requires verdict {@code CERTIFIED_BRAINLESS_SLOP} or slop score at least {@code 97.0}. */
+    public SlopTextAssert isBrainlessSlop() {
+        reportAssert().isBrainlessSlop();
+        return this;
+    }
+
+    /** Requires verdict {@code BRAIN_FREE_ZONE}. */
+    public SlopTextAssert isBrainFreeZone() {
+        reportAssert().isBrainFreeZone();
         return this;
     }
 

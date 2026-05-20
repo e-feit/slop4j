@@ -110,12 +110,22 @@ from `0.0` to `1.0`:
   acceptable score range.
 - `SLOP_ADJACENT`: enough slop indicators to require attention, but not enough
   for a high-severity narrative risk.
+- `TOTAL_CORPORATE_NOTHINGNESS`: a void of meaning, perfectly optimized for
+  corporate environments where saying nothing is the safest strategy.
 - `LINKEDIN_READY`: a high concentration of vague, generic or overly polished
   language patterns.
+- `PREMIUM_POLISHED_GARBAGE`: high-quality waste; grammatically perfect while
+  remaining entirely devoid of value.
 - `BOARD_APPROVED_SLOP`: the highest standard slop score range, dominated by
   generic, low-specificity or insufficiently actionable language.
+- `GARBAGE_IN_SLOP_OUT`: the result of a direct pipeline from a low-quality prompt
+  to an unfiltered output.
+- `CERTIFIED_BRAINLESS_SLOP`: the ultimate peak of slop; zero signs of cognitive
+  involvement and pure content-free existence.
 - `DANGEROUSLY_USEFUL`: a low slop score combined with strong concreteness and
   actionability signals.
+- `BRAIN_FREE_ZONE`: extreme confidence combined with near-zero evidence;
+  hallmark of advanced stochastic hallucination.
 
 ## Limitations
 

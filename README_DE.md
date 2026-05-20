@@ -115,13 +115,23 @@ gibt keine automatische Spracherkennung.
   Sprache innerhalb eines akzeptablen Score-Bereichs.
 - `SLOP_ADJACENT`: ausreichend Slop-Indikatoren für eine Prüfung, aber nicht
   genug für ein Narrativrisiko mit hoher Schwere.
+- `TOTAL_CORPORATE_NOTHINGNESS`: ein inhaltliches Vakuum, perfekt optimiert für
+  Umgebungen, in denen Nichtssagen die sicherste Strategie ist.
 - `LINKEDIN_READY`: eine hohe Konzentration vager, generischer oder übermäßig
   polierter Sprachmuster.
+- `PREMIUM_POLISHED_GARBAGE`: Hochglanz-Müll; grammatikalisch einwandfrei, aber
+  vollständig ohne inhaltlichen Wert.
 - `BOARD_APPROVED_SLOP`: der höchste reguläre Slop-Score-Bereich, dominiert von
   generischer, wenig spezifischer oder unzureichend handlungsorientierter
   Sprache.
+- `GARBAGE_IN_SLOP_OUT`: das Ergebnis einer direkten Pipeline von einem minderwertigen
+  Prompt zu einem ungefilterten Output.
+- `CERTIFIED_BRAINLESS_SLOP`: der absolute Gipfel des Slops; keinerlei Anzeichen
+  kognitiver Beteiligung, rein inhaltsfreie Existenz.
 - `DANGEROUSLY_USEFUL`: ein niedriger Slop-Score kombiniert mit starken Signalen
   für Konkretheit und Handlungsorientierung.
+- `BRAIN_FREE_ZONE`: extreme Selbstsicherheit bei nahezu null Belegen; Merkmal
+  fortgeschrittener stochastischer Halluzination.
 
 ## Grenzen
 

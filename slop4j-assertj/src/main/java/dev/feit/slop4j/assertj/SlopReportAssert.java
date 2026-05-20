@@ -300,37 +300,69 @@ public final class SlopReportAssert extends AbstractAssert<SlopReportAssert, Slo
         return this;
     }
 
-    /** Requires verdict neither {@code LINKEDIN_READY} nor {@code BOARD_APPROVED_SLOP}. */
+    /** Requires verdict neither {@code LINKEDIN_READY} nor higher slop severity. */
     public SlopReportAssert doesNotSoundLikeLinkedInPost() {
         SlopReport report = requireReport();
-        if (report.verdict() == SlopVerdict.LINKEDIN_READY
-                || report.verdict() == SlopVerdict.BOARD_APPROVED_SLOP) {
+        SlopVerdict v = report.verdict();
+        if (v == SlopVerdict.LINKEDIN_READY
+                || v == SlopVerdict.PREMIUM_POLISHED_GARBAGE
+                || v == SlopVerdict.BOARD_APPROVED_SLOP
+                || v == SlopVerdict.GARBAGE_IN_SLOP_OUT
+                || v == SlopVerdict.CERTIFIED_BRAINLESS_SLOP) {
             failWithMessage(
-                    "Expected verdict not to be LINKEDIN_READY or BOARD_APPROVED_SLOP.%n%n%s",
+                    "Expected verdict not to be LINKEDIN_READY or higher slop severity.%n%n%s",
                     formatReport(report));
         }
         return this;
     }
 
-    /** Requires verdict {@code LINKEDIN_READY} or {@code BOARD_APPROVED_SLOP}. */
+    /** Requires verdict {@code LINKEDIN_READY} or higher slop severity. */
     public SlopReportAssert soundsLikeLinkedInPost() {
         SlopReport report = requireReport();
-        if (!(report.verdict() == SlopVerdict.LINKEDIN_READY
-                || report.verdict() == SlopVerdict.BOARD_APPROVED_SLOP)) {
+        SlopVerdict v = report.verdict();
+        if (!(v == SlopVerdict.LINKEDIN_READY
+                || v == SlopVerdict.PREMIUM_POLISHED_GARBAGE
+                || v == SlopVerdict.BOARD_APPROVED_SLOP
+                || v == SlopVerdict.GARBAGE_IN_SLOP_OUT
+                || v == SlopVerdict.CERTIFIED_BRAINLESS_SLOP)) {
             failWithMessage(
-                    "Expected verdict to be LINKEDIN_READY or BOARD_APPROVED_SLOP.%n%n%s",
+                    "Expected verdict to be LINKEDIN_READY or higher slop severity.%n%n%s",
                     formatReport(report));
         }
         return this;
     }
 
-    /** Requires verdict {@code BOARD_APPROVED_SLOP} or slop score at least {@code 85.0}. */
+    /** Requires verdict {@code BOARD_APPROVED_SLOP} or higher slop severity. */
     public SlopReportAssert isBoardDeckReady() {
         SlopReport report = requireReport();
-        if (!(report.verdict() == SlopVerdict.BOARD_APPROVED_SLOP || report.slopScore() >= 85.0)) {
+        SlopVerdict v = report.verdict();
+        if (!(v == SlopVerdict.BOARD_APPROVED_SLOP
+                || v == SlopVerdict.GARBAGE_IN_SLOP_OUT
+                || v == SlopVerdict.CERTIFIED_BRAINLESS_SLOP
+                || report.slopScore() >= 85.0)) {
             failWithMessage(
-                    "Expected verdict BOARD_APPROVED_SLOP or slop score at least 85.0.%n%n%s",
+                    "Expected verdict BOARD_APPROVED_SLOP or higher slop severity.%n%n%s",
                     formatReport(report));
+        }
+        return this;
+    }
+
+    /** Requires verdict {@code CERTIFIED_BRAINLESS_SLOP} or slop score at least {@code 97.0}. */
+    public SlopReportAssert isBrainlessSlop() {
+        SlopReport report = requireReport();
+        if (!(report.verdict() == SlopVerdict.CERTIFIED_BRAINLESS_SLOP || report.slopScore() >= 97.0)) {
+            failWithMessage(
+                    "Expected verdict CERTIFIED_BRAINLESS_SLOP or slop score at least 97.0.%n%n%s",
+                    formatReport(report));
+        }
+        return this;
+    }
+
+    /** Requires verdict {@code BRAIN_FREE_ZONE}. */
+    public SlopReportAssert isBrainFreeZone() {
+        SlopReport report = requireReport();
+        if (report.verdict() != SlopVerdict.BRAIN_FREE_ZONE) {
+            failWithMessage("Expected verdict BRAIN_FREE_ZONE.%n%n%s", formatReport(report));
         }
         return this;
     }

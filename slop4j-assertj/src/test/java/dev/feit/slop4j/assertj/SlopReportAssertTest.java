@@ -122,6 +122,14 @@ class SlopReportAssertTest {
                 .containsNoImplementationDetails()
                 .maximizesPlausibleDeniability();
 
+        assertThat(report(98.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, SlopVerdict.CERTIFIED_BRAINLESS_SLOP))
+                .isBrainlessSlop()
+                .soundsLikeLinkedInPost()
+                .isBoardDeckReady();
+
+        assertThat(report(10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, SlopVerdict.BRAIN_FREE_ZONE))
+                .isBrainFreeZone();
+
         assertThat(report(10.0, 0.0, 0.0, 0.6, 0.6, 0.6, 0.0, 0.0, SlopVerdict.DANGEROUSLY_USEFUL))
                 .containsConcreteDetails()
                 .isActionable()

@@ -61,27 +61,51 @@ final class DefaultSlopScorer {
                 evidenceScore,
                 repetitionScore,
                 overconfidenceScore,
-                verdict(slopScore, concretenessScore, actionabilityScore),
+                verdict(
+                        slopScore,
+                        concretenessScore,
+                        actionabilityScore,
+                        overconfidenceScore,
+                        evidenceScore),
                 findings);
     }
 
     private static SlopVerdict verdict(
-            double slopScore, double concretenessScore, double actionabilityScore) {
+            double slopScore,
+            double concretenessScore,
+            double actionabilityScore,
+            double overconfidenceScore,
+            double evidenceScore) {
+        if (overconfidenceScore > 0.85 && evidenceScore < 0.1) {
+            return SlopVerdict.BRAIN_FREE_ZONE;
+        }
         if (slopScore < 25.0 && concretenessScore > 0.7 && actionabilityScore > 0.5) {
             return SlopVerdict.DANGEROUSLY_USEFUL;
         }
-        if (slopScore < 20.0) {
+        if (slopScore < 15.0) {
             return SlopVerdict.CLEAN;
         }
-        if (slopScore < 40.0) {
+        if (slopScore < 30.0) {
             return SlopVerdict.ACCEPTABLY_FLUFFY;
         }
-        if (slopScore < 65.0) {
+        if (slopScore < 45.0) {
             return SlopVerdict.SLOP_ADJACENT;
         }
-        if (slopScore < 85.0) {
+        if (slopScore < 60.0) {
+            return SlopVerdict.TOTAL_CORPORATE_NOTHINGNESS;
+        }
+        if (slopScore < 75.0) {
             return SlopVerdict.LINKEDIN_READY;
         }
-        return SlopVerdict.BOARD_APPROVED_SLOP;
+        if (slopScore < 85.0) {
+            return SlopVerdict.PREMIUM_POLISHED_GARBAGE;
+        }
+        if (slopScore < 92.0) {
+            return SlopVerdict.BOARD_APPROVED_SLOP;
+        }
+        if (slopScore < 97.0) {
+            return SlopVerdict.GARBAGE_IN_SLOP_OUT;
+        }
+        return SlopVerdict.CERTIFIED_BRAINLESS_SLOP;
     }
 }
