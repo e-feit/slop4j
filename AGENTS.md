@@ -10,6 +10,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
 
 ## 2. Project Structure & Technical Constraints (Do Not Violate)
 * **Multi-Module Structure:**
+  * `slop4j-bom`: Bill of Materials for external consumers.
   * `slop4j-core`: The main library containing the analysis logic.
   * `slop4j-examples`: Demonstration projects showing how to use the library.
 * **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.

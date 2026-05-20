@@ -13,6 +13,7 @@
     <description>Deterministic AI output quality analysis for Java applications.</description>
 
     <modules>
+        <module>slop4j-bom</module>
         <module>slop4j-core</module>
         <module>slop4j-examples</module>
     </modules>
