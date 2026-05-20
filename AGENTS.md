@@ -13,6 +13,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
   * `slop4j-bom`: Bill of Materials for external consumers.
   * `slop4j-core`: The main library containing the analysis logic.
   * `slop4j-examples`: Demonstration projects showing how to use the library.
+* **CI-Friendly Versioning:** Use `${revision}` for the project version. The actual version is defined in the root `pom.xml` via the `<revision>` property.
 * **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.
 * **JSpecify for Nullability:** Use JSpecify annotations (such as `@NullMarked` and `@Nullable`) to define clear nullability contracts. These must be added with `provided` scope in Maven, ensuring zero runtime footprint.
 * **Code Formatting (Spotless):** All Java files must be formatted using Spotless. Do not manually format or commit unformatted code.

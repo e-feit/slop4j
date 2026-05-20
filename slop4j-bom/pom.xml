@@ -7,7 +7,7 @@
     <parent>
         <groupId>dev.feit</groupId>
         <artifactId>slop4j</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>slop4j-bom</artifactId>
