@@ -1,0 +1,54 @@
+variables:
+  GIT_STRATEGY: clone
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+stages:
+  - lint
+  - test
+  - package
+
+.maven_cache: &maven_cache
+  cache:
+    key: maven
+    paths:
+      - .m2/repository
+    policy: pull-push
+
+maven lint:
+  image: maven:3.9-eclipse-temurin-17
+  stage: lint
+  <<: *maven_cache
+  script:
+    - mvn --batch-mode spotless:check
+
+maven test:
+  image: maven:3.9-eclipse-temurin-17
+  stage: test
+  <<: *maven_cache
+  script:
+    - mvn --batch-mode clean verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - "**/target/surefire-reports/TEST-*.xml"
+        - "**/target/failsafe-reports/TEST-*.xml"
+    paths:
+      - "**/target/surefire-reports"
+      - "**/target/failsafe-reports"
+      - "**/target/site"
+    expire_in: "1 week"
+
+maven package:
+  image: maven:3.9-eclipse-temurin-17
+  stage: package
+  <<: *maven_cache
+  only:
+    - tags
+  script:
+    - mvn --batch-mode -DskipTests package
+  artifacts:
+    paths:
+      - "**/target/*.jar"
+      - "**/target/*.pom"
+    expire_in: "1 week"
