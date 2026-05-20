@@ -1,5 +1,6 @@
 package dev.feit.slop4j;
 
+import dev.feit.slop4j.internal.analysis.DefaultSlopAnalyzer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,31 +51,6 @@ public final class SlopAnalyzerBuilder {
     }
 
     public SlopAnalyzer build() {
-        return new DefaultAnalyzer(List.copyOf(languages), maxFindingEvidenceLength);
-    }
-
-    private static final class DefaultAnalyzer implements SlopAnalyzer {
-
-        private final List<Language> languages;
-        private final int maxFindingEvidenceLength;
-
-        private DefaultAnalyzer(List<Language> languages, int maxFindingEvidenceLength) {
-            this.languages = languages;
-            this.maxFindingEvidenceLength = maxFindingEvidenceLength;
-        }
-
-        @Override
-        public SlopReport analyze(String text) {
-            Objects.requireNonNull(text, "text");
-            return new SlopReport(0.0, SlopVerdict.DANGEROUSLY_USEFUL, List.of());
-        }
-
-        List<Language> languages() {
-            return languages;
-        }
-
-        int maxFindingEvidenceLength() {
-            return maxFindingEvidenceLength;
-        }
+        return new DefaultSlopAnalyzer(List.copyOf(languages), maxFindingEvidenceLength);
     }
 }

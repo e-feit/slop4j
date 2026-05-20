@@ -133,13 +133,16 @@ slop4j/
           Severity.java
           Language.java
         dev/feit/slop4j/internal/
-          DefaultSlopAnalyzer.java
-          DefaultSlopScorer.java
           SlopContext.java
           TextTokenizer.java
+          ScoreMath.java
+        dev/feit/slop4j/internal/analysis/
+          DefaultSlopAnalyzer.java
+          DefaultSlopScorer.java
+        dev/feit/slop4j/internal/dictionary/
           ResourceDictionaryLoader.java
           DictionarySet.java
-          ScoreMath.java
+          LanguageDictionary.java
         dev/feit/slop4j/internal/rules/
           SlopRule.java
           BuzzwordRule.java
@@ -465,6 +468,10 @@ Loader:
 
 ```java
 final class ResourceDictionaryLoader {
+
+    DictionarySet load(Language language) {
+        // Eine einzelne Sprache laden.
+    }
 
     DictionarySet load(Collection<Language> languages) {
         // Für jede Sprache die passende YAML-Datei laden.

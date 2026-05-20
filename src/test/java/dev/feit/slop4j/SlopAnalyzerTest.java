@@ -14,4 +14,14 @@ class SlopAnalyzerTest {
         assertThat(report.verdict()).isEqualTo(SlopVerdict.DANGEROUSLY_USEFUL);
         assertThat(report.findings()).isEmpty();
     }
+
+    @Test
+    void buildsAnalyzerWithMergedLanguageDictionaries() {
+        SlopAnalyzer analyzer =
+                SlopAnalyzer.builder().languages(Language.ENGLISH, Language.GERMAN).build();
+
+        SlopReport report = analyzer.analyze("Hello, Welt.");
+
+        assertThat(report.slopScore()).isZero();
+    }
 }
