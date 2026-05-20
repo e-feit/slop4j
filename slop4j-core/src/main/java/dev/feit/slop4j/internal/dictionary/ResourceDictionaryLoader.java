@@ -17,7 +17,7 @@ import org.yaml.snakeyaml.Yaml;
 
 public final class ResourceDictionaryLoader {
 
-    private static final String RESOURCE_DIRECTORY = "/dev/feit/slop4j/languages/";
+    private static final String RESOURCE_DIRECTORY = "/dev/feit/slop4j/lexicon/";
 
     private final Yaml yaml;
 

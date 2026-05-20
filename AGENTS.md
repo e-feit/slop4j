@@ -8,7 +8,10 @@ This guide helps future agent sessions understand the non-obvious architecture c
 * **No Jokes in Code:** Never write jokes, easter eggs, or sarcastic remarks in code comments, commit messages, or PR descriptions. The humor must only emerge from the serious implementation of ridiculous concepts (e.g., `BOARD_APPROVED_SLOP`, `DANGEROUSLY_USEFUL`).
 * **README Language Synchronization:** `README.md` is the primary English README and `README_DE.md` is the German counterpart. Always keep both files strictly synchronized. Any content change in one README must be reflected in the other README in the same change.
 
-## 2. Technical Constraints (Do Not Violate)
+## 2. Project Structure & Technical Constraints (Do Not Violate)
+* **Multi-Module Structure:**
+  * `slop4j-core`: The main library containing the analysis logic.
+  * `slop4j-examples`: Demonstration projects showing how to use the library.
 * **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.
 * **JSpecify for Nullability:** Use JSpecify annotations (such as `@NullMarked` and `@Nullable`) to define clear nullability contracts. These must be added with `provided` scope in Maven, ensuring zero runtime footprint.
 * **Code Formatting (Spotless):** All Java files must be formatted using Spotless. Do not manually format or commit unformatted code.
@@ -18,7 +21,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
 
 ## 3. Algorithm & Processing Details (Easy to Miss)
 * **Record Fields:** Do **not** use `Optional` as a field type in records (e.g., in `SlopFinding`). Use empty strings (`""`) to represent missing evidence instead.
-* **Resource Loading:** Dictionaries are loaded from `.yaml` files under `dev/feit/slop4j/languages/` using SnakeYAML.
+* **Resource Loading:** Dictionaries are loaded from `.yaml` files under `dev/feit/slop4j/lexicon/` using SnakeYAML.
   * **Normalization:** Dictionary values must be stripped, lowercased using `Locale.ROOT`, and duplicates/empty entries removed upon loading.
   * **Merge Behavior:** When multiple languages are active, dictionaries are merged. There is no automatic language detection in Step 1.
 * **Tokenizer Regex:** Always use exactly: `Pattern.compile("[\\p{L}\\p{N}][\\p{L}\\p{N}\\-']*")` to correctly tokenise words with hyphens and umlauts.
