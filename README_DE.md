@@ -78,15 +78,19 @@ gibt keine automatische Spracherkennung.
 
 ## Verdicts
 
-- `CLEAN`
-- `ACCEPTABLY_FLUFFY`
-- `SLOP_ADJACENT`
-- `LINKEDIN_READY`
-- `BOARD_APPROVED_SLOP`
-- `DANGEROUSLY_USEFUL`
-
-`DANGEROUSLY_USEFUL` ist für Ausgaben mit niedrigem Slop-Score, hoher
-Konkretheit und hoher Handlungsorientierung reserviert.
+- `CLEAN`: keine wesentlichen Slop-Indikatoren; unterhalb der niedrigsten
+  regulären Score-Schwelle.
+- `ACCEPTABLY_FLUFFY`: begrenzte generische oder schwach handlungsorientierte
+  Sprache innerhalb eines akzeptablen Score-Bereichs.
+- `SLOP_ADJACENT`: ausreichend Slop-Indikatoren für eine Prüfung, aber nicht
+  genug für ein Narrativrisiko mit hoher Schwere.
+- `LINKEDIN_READY`: eine hohe Konzentration vager, generischer oder übermäßig
+  polierter Sprachmuster.
+- `BOARD_APPROVED_SLOP`: der höchste reguläre Slop-Score-Bereich, dominiert von
+  generischer, wenig spezifischer oder unzureichend handlungsorientierter
+  Sprache.
+- `DANGEROUSLY_USEFUL`: ein niedriger Slop-Score kombiniert mit starken Signalen
+  für Konkretheit und Handlungsorientierung.
 
 ## Grenzen
 

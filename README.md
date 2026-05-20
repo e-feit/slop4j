@@ -75,15 +75,18 @@ from `0.0` to `1.0`:
 
 ## Verdicts
 
-- `CLEAN`
-- `ACCEPTABLY_FLUFFY`
-- `SLOP_ADJACENT`
-- `LINKEDIN_READY`
-- `BOARD_APPROVED_SLOP`
-- `DANGEROUSLY_USEFUL`
-
-`DANGEROUSLY_USEFUL` is reserved for outputs with a low slop score, high
-concreteness and high actionability.
+- `CLEAN`: no material slop indicators; below the lowest standard score
+  threshold.
+- `ACCEPTABLY_FLUFFY`: limited generic or weakly actionable language within an
+  acceptable score range.
+- `SLOP_ADJACENT`: enough slop indicators to require attention, but not enough
+  for a high-severity narrative risk.
+- `LINKEDIN_READY`: a high concentration of vague, generic or overly polished
+  language patterns.
+- `BOARD_APPROVED_SLOP`: the highest standard slop score range, dominated by
+  generic, low-specificity or insufficiently actionable language.
+- `DANGEROUSLY_USEFUL`: a low slop score combined with strong concreteness and
+  actionability signals.
 
 ## Limitations
 
