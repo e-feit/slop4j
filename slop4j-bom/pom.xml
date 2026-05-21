@@ -34,6 +34,11 @@
                 <artifactId>slop4j-maven-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>dev.feit</groupId>
+                <artifactId>slop4j-cli</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- External Dependencies: Configuration & Metadata -->
             <dependency>

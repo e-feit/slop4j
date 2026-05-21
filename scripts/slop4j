@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd "${script_dir}/.." && pwd)"
+jar="${repo_root}/slop4j-cli/target/slop4j-cli-0.1.0-SNAPSHOT.jar"
+
+if [[ "${SLOP4J_REBUILD:-0}" == "1" || ! -f "${jar}" ]]; then
+  (cd "${repo_root}" && mvn -q -B -pl slop4j-cli -am package)
+fi
+
+exec java -jar "${jar}" "$@"

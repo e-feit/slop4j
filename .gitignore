@@ -68,6 +68,9 @@ out/
 target/
 .flattened-pom.xml
 
+# Local implementation plans
+.plans/
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 

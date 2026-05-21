@@ -17,6 +17,7 @@
         <module>slop4j-core</module>
         <module>slop4j-assertj</module>
         <module>slop4j-maven-plugin</module>
+        <module>slop4j-cli</module>
         <module>slop4j-examples</module>
     </modules>
 
@@ -30,6 +31,7 @@
         <jspecify.version>1.0.0</jspecify.version>
         <maven.version>3.9.9</maven.version>
         <maven-plugin-tools.version>3.15.1</maven-plugin-tools.version>
+        <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
         <snakeyaml.version>2.6</snakeyaml.version>
         <jacoco.version>0.8.14</jacoco.version>
         <spotless.version>2.46.1</spotless.version>
@@ -51,6 +53,11 @@
             <dependency>
                 <groupId>dev.feit</groupId>
                 <artifactId>slop4j-maven-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.feit</groupId>
+                <artifactId>slop4j-cli</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -119,6 +126,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
                     <version>${maven-plugin-tools.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>com.diffplug.spotless</groupId>

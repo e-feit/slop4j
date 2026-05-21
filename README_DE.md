@@ -149,6 +149,32 @@ Konfigurationsparameter:
 | `maxFindingsPerFile` | `5` | Maximale Anzahl ausgegebener Findings pro Datei. |
 | `maxFindingEvidenceLength` | `120` | Maximale Evidence-Textlänge für den Analyzer. |
 
+## CLI
+
+`slop4j-cli` stellt denselben deterministischen Audit-Workflow bereit, ohne eine
+Maven-Plugin-Ausführung vorauszusetzen. Die CLI ist für lokale Prüfungen,
+CI-Jobs und Pre-Commit-Hooks vorgesehen, die einen Prozess-Exit-Code benötigen.
+
+Nach dem lokalen Build des Source-Checkouts:
+
+```bash
+mvn -pl slop4j-cli -am package
+java -jar slop4j-cli/target/slop4j-cli-0.1.0-SNAPSHOT.jar audit README.md README_DE.md --lang en,de --max-score 60
+```
+
+Für Source-Checkouts enthält das Repository außerdem einen Shell-Wrapper, der
+das CLI-Jar beim ersten Aufruf baut, falls es fehlt:
+
+```bash
+./scripts/slop4j audit README.md README_DE.md --lang en,de --max-score 60
+```
+
+Mit `SLOP4J_REBUILD=1` erzwingt der Wrapper vor der Ausführung einen neuen
+Jar-Build.
+
+Die CLI gibt `0` zurück, wenn keine Policy verletzt wurde, `1` bei
+Slop-Policy-Verletzungen, `2` bei Nutzungsfehlern und `3` bei Datei-I/O-Fehlern.
+
 ## Unterstützte Sprachen
 
 Der Analyzer unterstützt englische und deutsche Wörterbücher. Der

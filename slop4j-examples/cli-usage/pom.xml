@@ -6,20 +6,12 @@
 
     <parent>
         <groupId>dev.feit</groupId>
-        <artifactId>slop4j</artifactId>
+        <artifactId>slop4j-examples</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>slop4j-examples</artifactId>
+    <artifactId>cli-usage</artifactId>
     <packaging>pom</packaging>
 
-    <name>slop4j-examples</name>
-    <description>Example usage projects for slop4j.</description>
-
-    <modules>
-        <module>basic-core-usage</module>
-        <module>assertj-usage</module>
-        <module>maven-plugin-usage</module>
-        <module>cli-usage</module>
-    </modules>
+    <name>slop4j-examples-cli</name>
 </project>
