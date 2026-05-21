@@ -12,6 +12,9 @@ This guide helps future agent sessions understand the non-obvious architecture c
 * **Multi-Module Structure:**
   * `slop4j-bom`: Bill of Materials for external consumers.
   * `slop4j-core`: The main library containing the analysis logic.
+  * `slop4j-assertj`: Custom AssertJ assertions for Slop4J testing.
+  * `slop4j-maven-plugin`: Maven plugin to analyze and enforce slop rules during the build.
+  * `slop4j-cli`: Command Line Interface for slop analysis.
   * `slop4j-examples`: Demonstration projects showing how to use the library.
 * **Examples Must Track Module-Level Changes:** When a new Maven module is added, or an existing module receives substantial new functionality or breaking changes, update `slop4j-examples` in the same change. Add or adjust an example module that demonstrates the new or changed public usage. Do not ship major module-level API changes without a corresponding example project unless there is a clearly documented reason.
 * **CI-Friendly Versioning:** Use `${revision}` for the project version. The actual version is defined in the root `pom.xml` via the `<revision>` property.
@@ -29,7 +32,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
   * **Merge Behavior:** When multiple languages are active, dictionaries are merged. There is no automatic language detection in Step 1.
 * **Tokenizer Regex:** Always use exactly: `Pattern.compile("[\\p{L}\\p{N}][\\p{L}\\p{N}\\-']*")` to correctly tokenise words with hyphens and umlauts.
 * **Sentence Splitting:** Use `text.split("(?<=[.!?])\\s+")`.
-* **Length Gating:** Short texts (under 80 tokens) must not be fully penalized for low evidence, low actionability, or low concreteness. Apply a scaling factor: `lengthFactor = Math.min(1.0, Math.max(0.0, tokenCount / 80.0))` to these penalties.
+* **Length Gating:** Short texts (under 80 tokens) must not be fully penalized for low evidence, low actionability, or low concreteness. Apply a scaling factor: `lengthFactor = ScoreMath.clamp01(context.tokenCount() / 80.0)` to these penalties.
 
 ## 4. Verification Commands & Pre-Push Requirements
 * **Strict Verification:** Before pushing to a remote repository, you MUST ensure that all tests pass AND the code is properly formatted. A push is only permitted if `mvn clean test` and `mvn spotless:check` are green.
