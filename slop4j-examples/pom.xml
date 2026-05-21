@@ -19,5 +19,6 @@
     <modules>
         <module>basic-core-usage</module>
         <module>assertj-usage</module>
+        <module>maven-plugin-usage</module>
     </modules>
 </project>

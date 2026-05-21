@@ -83,6 +83,67 @@ assertThatSlop(strategyDeck)
     .maximizesPlausibleDeniability();
 ```
 
+## Maven Plugin
+
+`slop4j-maven-plugin` audits README files, ADRs and Markdown documentation
+during the Maven build. It uses the same deterministic analyzer as
+`slop4j-core` and does not call an external service.
+
+```xml
+<plugin>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-maven-plugin</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <configuration>
+        <maxSlopScore>60.0</maxSlopScore>
+        <languages>
+            <language>en</language>
+            <language>de</language>
+        </languages>
+        <includes>
+            <include>README.md</include>
+            <include>README_DE.md</include>
+            <include>docs/**/*.md</include>
+            <include>adr/**/*.md</include>
+        </includes>
+        <failOnSlop>true</failOnSlop>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>audit</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
+For governance profiles that require a minimum level of strategic abstraction,
+the plugin can also fail when documentation becomes too concrete:
+
+```xml
+<configuration>
+    <failIfTooConcrete>true</failIfTooConcrete>
+    <minSlopScore>80.0</minSlopScore>
+</configuration>
+```
+
+Configuration parameters:
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `maxSlopScore` | `60.0` | Maximum allowed score when `failOnSlop` is enabled. |
+| `minSlopScore` | `80.0` | Minimum required score when `failIfTooConcrete` is enabled. |
+| `failOnSlop` | `true` | Fails the build when any scanned file exceeds `maxSlopScore`. |
+| `failIfTooConcrete` | `false` | Fails the build when any scanned file is below `minSlopScore`. |
+| `languages` | `en` | Analyzer languages. Supported values: `en`, `english`, `de`, `german`, `deutsch`. |
+| `includes` | `README.md`, `README_DE.md`, `docs/**/*.md`, `adr/**/*.md` | Project-relative glob patterns to scan. |
+| `excludes` | `target/**`, `.git/**` | Project-relative glob patterns ignored after include matching. |
+| `skip` | `false` | Skips execution. User property: `slop4j.skip`. |
+| `failIfNoFiles` | `false` | Fails the build when no files match. |
+| `maxFindingsPerFile` | `5` | Maximum number of findings printed per file. |
+| `maxFindingEvidenceLength` | `120` | Maximum evidence text length used by the analyzer. |
+
 ## Supported Languages
 
 The analyzer supports English and German dictionaries. The default analyzer
