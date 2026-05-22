@@ -16,6 +16,10 @@
     <name>slop4j-examples</name>
     <description>Example usage projects for slop4j.</description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <modules>
         <module>basic-core-usage</module>
         <module>assertj-usage</module>

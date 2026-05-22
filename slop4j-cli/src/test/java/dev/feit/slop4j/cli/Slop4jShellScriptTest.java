@@ -17,6 +17,7 @@ class Slop4jShellScriptTest {
 		String content = Files.readString(script);
 		assertThat(content).contains("SLOP4J_REBUILD").contains("mvn -q -B -pl slop4j-cli -am package")
 				.contains("java -jar").contains("\"$@\"");
+		assertThat(content).doesNotContain("slop4j-cli-0.1.0-SNAPSHOT.jar").contains("slop4j-cli-*.jar");
 	}
 
 	private static Path repositoryRoot() {
