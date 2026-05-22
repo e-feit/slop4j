@@ -18,6 +18,10 @@ detection. It does not call an external service.
 `slop4j` does not verify factual correctness. It detects textual smells commonly
 associated with vague, generic or overconfident AI-generated content.
 
+## Requirements
+
+`slop4j` requires Java 17 or higher.
+
 ## Installation
 
 <!-- slop4j-installation:start -->

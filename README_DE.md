@@ -20,6 +20,10 @@ Dienst auf.
 die häufig mit vagen, generischen oder übermäßig selbstsicheren AI-generierten
 Inhalten verbunden sind.
 
+## Anforderungen
+
+`slop4j` benötigt Java 17 oder höher.
+
 ## Installation
 
 <!-- slop4j-installation:start -->
