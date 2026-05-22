@@ -21,14 +21,14 @@ fi
 git config user.name "${GITLAB_RELEASE_BOT_NAME:-slop4j release automation}"
 git config user.email "${GITLAB_RELEASE_BOT_EMAIL:-release-bot@users.noreply.gitlab.com}"
 
-git add pom.xml
+git add pom.xml README.md README_DE.md
 
 if git diff --cached --quiet; then
   echo "No revision bump to commit."
   exit 0
 fi
 
-git commit -m "chore: bump development version to ${next_snapshot} [skip ci]"
+git commit -m "chore: update release metadata for ${next_snapshot} [skip ci]"
 
 if [[ "${RELEASE_BUMP_DRY_RUN:-false}" == "true" ]]; then
   echo "RELEASE_BUMP_DRY_RUN=true, skipping push."

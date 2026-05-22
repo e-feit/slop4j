@@ -20,6 +20,8 @@ maven lint:
   stage: lint
   <<: *maven_cache
   script:
+    - scripts/ci/test-release-version-helpers.sh
+    - scripts/ci/test-readme-release-version.sh
     - mvn --batch-mode spotless:check
 
 maven test:
@@ -80,6 +82,7 @@ maven publish central:
     - scripts/ci/import-maven-gpg-key.sh
     - mvn --batch-mode --settings "$CENTRAL_SETTINGS" -Drevision="$RELEASE_VERSION" -Pcentral-publish clean deploy
     - scripts/ci/print-central-bundle.sh
+    - scripts/ci/update-readme-release-version.sh "$RELEASE_VERSION"
     - scripts/ci/set-revision-property.sh "$NEXT_SNAPSHOT"
     - mvn --batch-mode -Drevision="$NEXT_SNAPSHOT" -DskipTests install
     - scripts/ci/commit-next-snapshot.sh "$NEXT_SNAPSHOT"

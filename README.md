@@ -20,8 +20,40 @@ associated with vague, generic or overconfident AI-generated content.
 
 ## Installation
 
-`slop4j` is not published to Maven Central yet. Until a release is available,
-use the source checkout locally instead of declaring a Maven dependency.
+<!-- slop4j-installation:start -->
+Latest published version: `0.1.2`.
+
+For the core library:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-core</artifactId>
+    <version>0.1.2</version>
+</dependency>
+```
+
+For AssertJ assertions in tests:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-assertj</artifactId>
+    <version>0.1.2</version>
+    <scope>test</scope>
+</dependency>
+```
+
+For Maven build audits:
+
+```xml
+<plugin>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-maven-plugin</artifactId>
+    <version>0.1.2</version>
+</plugin>
+```
+<!-- slop4j-installation:end -->
 
 The Java package and automatic module name are both `dev.feit.slop4j`.
 
@@ -93,7 +125,7 @@ during the Maven build. It uses the same deterministic analyzer as
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.2</version><!-- slop4j-release-version -->
     <configuration>
         <maxSlopScore>60.0</maxSlopScore>
         <languages>
@@ -154,13 +186,6 @@ After building the source checkout locally:
 
 ```bash
 mvn -pl slop4j-cli -am package
-java -jar slop4j-cli/target/slop4j-cli-0.1.0-SNAPSHOT.jar audit README.md README_DE.md --lang en,de --max-score 60
-```
-
-For source checkouts, the repository also includes a shell wrapper that builds
-the CLI jar on first use when it is missing:
-
-```bash
 ./scripts/slop4j audit README.md README_DE.md --lang en,de --max-score 60
 ```
 
