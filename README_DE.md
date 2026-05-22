@@ -20,11 +20,46 @@ Dienst auf.
 die häufig mit vagen, generischen oder übermäßig selbstsicheren AI-generierten
 Inhalten verbunden sind.
 
+## Anforderungen
+
+`slop4j` benötigt Java 17 oder höher.
+
 ## Installation
 
-`slop4j` ist noch nicht auf Maven Central veröffentlicht. Bis ein Release
-verfügbar ist, sollte der lokale Source-Checkout statt einer Maven-Dependency
-verwendet werden.
+<!-- slop4j-installation:start -->
+Aktuell veröffentlichte Version: `0.1.2`.
+
+Für die Core-Bibliothek:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-core</artifactId>
+    <version>0.1.2</version>
+</dependency>
+```
+
+Für AssertJ-Assertions in Tests:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-assertj</artifactId>
+    <version>0.1.2</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Für Maven-Build-Audits:
+
+```xml
+<plugin>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-maven-plugin</artifactId>
+    <version>0.1.2</version>
+</plugin>
+```
+<!-- slop4j-installation:end -->
 
 Das Java-Package und der automatische Modulname lauten beide
 `dev.feit.slop4j`.
@@ -97,7 +132,7 @@ während des Maven-Builds. Es verwendet denselben deterministischen Analyzer wie
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.2</version><!-- slop4j-release-version -->
     <configuration>
         <maxSlopScore>60.0</maxSlopScore>
         <languages>
@@ -159,13 +194,6 @@ Nach dem lokalen Build des Source-Checkouts:
 
 ```bash
 mvn -pl slop4j-cli -am package
-java -jar slop4j-cli/target/slop4j-cli-0.1.0-SNAPSHOT.jar audit README.md README_DE.md --lang en,de --max-score 60
-```
-
-Für Source-Checkouts enthält das Repository außerdem einen Shell-Wrapper, der
-das CLI-Jar beim ersten Aufruf baut, falls es fehlt:
-
-```bash
 ./scripts/slop4j audit README.md README_DE.md --lang en,de --max-score 60
 ```
 
