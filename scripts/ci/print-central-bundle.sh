@@ -16,7 +16,7 @@ fi
 
 bundle="${bundles[0]}"
 
-echo "Central publishing draft bundle:"
+echo "Central publishing bundle:"
 echo "$bundle"
 echo
 echo "Bundle contents:"
