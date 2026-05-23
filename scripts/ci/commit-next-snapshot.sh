@@ -18,8 +18,8 @@ if [[ -z "${CI_SERVER_HOST:-}" || -z "${CI_PROJECT_PATH:-}" ]]; then
   exit 2
 fi
 
-git config user.name "${GITLAB_RELEASE_BOT_NAME:-slop4j release automation}"
-git config user.email "${GITLAB_RELEASE_BOT_EMAIL:-release-bot@users.noreply.gitlab.com}"
+release_bot_name="${GITLAB_RELEASE_BOT_NAME:-slop4j release automation}"
+release_bot_email="${GITLAB_RELEASE_BOT_EMAIL:-release-bot@users.noreply.gitlab.com}"
 
 git add pom.xml README.md README_DE.md
 
@@ -28,7 +28,11 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-git commit -m "chore: update release metadata for ${next_snapshot} [skip ci]"
+GIT_AUTHOR_NAME="${release_bot_name}" \
+  GIT_AUTHOR_EMAIL="${release_bot_email}" \
+  GIT_COMMITTER_NAME="${release_bot_name}" \
+  GIT_COMMITTER_EMAIL="${release_bot_email}" \
+  git commit -m "chore: update release metadata for ${next_snapshot} [skip ci]"
 
 if [[ "${RELEASE_BUMP_DRY_RUN:-false}" == "true" ]]; then
   echo "RELEASE_BUMP_DRY_RUN=true, skipping push."
