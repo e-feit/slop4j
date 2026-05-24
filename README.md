@@ -163,16 +163,17 @@ Strict governance profiles can also enforce a *minimum* slop level to ensure tha
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `maxSlopScore` | `60.0` | Maximum allowed score when `failOnSlop` is enabled. |
-| `minSlopScore` | `80.0` | Minimum required score when `failIfTooConcrete` is enabled. |
-| `failOnSlop` | `true` | Fails the build when any scanned file exceeds `maxSlopScore`. |
-| `failIfTooConcrete` | `false` | Fails the build when any scanned file is below `minSlopScore`. |
-| `languages` | `en` | Analyzer languages (`en`, `de`). |
-| `includes` | `README.md`, ... | Project-relative glob patterns to scan. |
-| `excludes` | `target/**`, ... | Patterns to ignore. |
-| `skip` | `false` | Skips execution (User property: `slop4j.skip`). |
-| `failIfNoFiles` | `false` | Fails the build when no files match. |
-| `maxFindingsPerFile` | `5` | Maximum number of findings printed per file. |
+| `maxSlopScore` | `60.0` | Upper threshold for permissible slop levels before governance intervention (build failure). |
+| `minSlopScore` | `80.0` | Minimum mandatory slop level required to maintain strategic abstraction. |
+| `failOnSlop` | `true` | Enforces a build failure if the narrative precision exceeds the `maxSlopScore`. |
+| `failIfTooConcrete` | `false` | Protects strategic optionality by failing the build if the content becomes dangerously concrete. |
+| `languages` | `en` | Target languages for narrative auditing. Supported: `en`, `english`, `de`, `german`, `deutsch`. |
+| `includes` | `README.md`, `README_DE.md`, `docs/**/*.md`, `adr/**/*.md` | Project-relative glob patterns for inclusion in the governance audit. |
+| `excludes` | `target/**`, `.git/**` | Path patterns to be excluded from the audit process. |
+| `skip` | `false` | Bypasses the governance audit. May also be toggled via `-Dslop4j.skip`. |
+| `failIfNoFiles` | `false` | Triggers a failure if no documents are identified for narrative auditing. |
+| `maxFindingsPerFile` | `5` | Maximum number of narrative smells reported per individual file. |
+| `maxFindingEvidenceLength` | `120` | Character limit for extracted evidence snippets used in governance reporting. |
 
 ## Spring Boot Starter
 

@@ -163,16 +163,17 @@ Strikte Governance-Profile können zudem einen *minimalen* Slop-Level erzwingen,
 
 | Parameter | Standardwert | Beschreibung |
 | --- | --- | --- |
-| `maxSlopScore` | `60.0` | Maximal erlaubter Score bei aktiviertem `failOnSlop`. |
-| `minSlopScore` | `80.0` | Minimal erforderlicher Score bei aktiviertem `failIfTooConcrete`. |
-| `failOnSlop` | `true` | Lässt den Build fehlschlagen, wenn eine Datei `maxSlopScore` überschreitet. |
-| `failIfTooConcrete` | `false` | Lässt den Build fehlschlagen, wenn eine Datei unter `minSlopScore` liegt. |
-| `languages` | `en` | Analyzer-Sprachen (`en`, `de`). |
-| `includes` | `README.md`, ... | Projektrelative Glob-Pattern für den Scan. |
-| `excludes` | `target/**`, ... | Auszuschließende Pattern. |
-| `skip` | `false` | Überspringt die Ausführung (User-Property: `slop4j.skip`). |
-| `failIfNoFiles` | `false` | Fehler, wenn keine passenden Dateien gefunden werden. |
-| `maxFindingsPerFile` | `5` | Maximale Anzahl an Findings pro Datei. |
+| `maxSlopScore` | `60.0` | Obergrenze für zulässigen Slop vor einer Governance-Intervention (Build-Fehler). |
+| `minSlopScore` | `80.0` | Erforderlicher Mindest-Slop zur Aufrechterhaltung der strategischen Abstraktionsebene. |
+| `failOnSlop` | `true` | Erzwingt einen Build-Fehler, wenn die narrative Präzision den `maxSlopScore` überschreitet. |
+| `failIfTooConcrete` | `false` | Schützt die strategische Flexibilität durch Build-Abbruch bei gefährlich konkreten Inhalten. |
+| `languages` | `en` | Ziel-Sprachräume für das narrative Audit. Unterstützt: `en`, `english`, `de`, `german`, `deutsch`. |
+| `includes` | `README.md`, `README_DE.md`, `docs/**/*.md`, `adr/**/*.md` | Projektrelative Glob-Pattern für die Einbeziehung in das Governance-Audit. |
+| `excludes` | `target/**`, `.git/**` | Pfad-Muster, die vom Audit-Prozess ausgeschlossen werden sollen. |
+| `skip` | `false` | Umgeht das Governance-Audit. Kann auch via `-Dslop4j.skip` gesteuert werden. |
+| `failIfNoFiles` | `false` | Löst einen Fehler aus, falls keine relevanten Dokumente für den Scan identifiziert wurden. |
+| `maxFindingsPerFile` | `5` | Maximale Anzahl an gemeldeten „Textual Smells“ pro individueller Datei. |
+| `maxFindingEvidenceLength` | `120` | Zeichenlimit für extrahierte Belegfragmente im Governance-Reporting. |
 
 ## Spring-Boot-Starter
 
