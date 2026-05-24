@@ -25,7 +25,7 @@ associated with vague, generic or overconfident AI-generated content.
 ## Installation
 
 <!-- slop4j-installation:start -->
-Latest published version: `0.1.2`.
+Latest published version: `0.2.1`.
 
 For the core library:
 
@@ -33,7 +33,7 @@ For the core library:
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-core</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ For AssertJ assertions in tests:
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-assertj</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -54,7 +54,7 @@ For Maven build audits:
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.1</version>
 </plugin>
 ```
 
@@ -64,7 +64,7 @@ For Spring Boot auto-configuration:
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-spring-boot-starter</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 <!-- slop4j-installation:end -->
@@ -139,7 +139,7 @@ during the Maven build. It uses the same deterministic analyzer as
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.1.2</version><!-- slop4j-release-version -->
+    <version>0.2.1</version><!-- slop4j-release-version -->
     <configuration>
         <maxSlopScore>60.0</maxSlopScore>
         <languages>
