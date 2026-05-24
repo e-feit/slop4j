@@ -74,6 +74,20 @@ replace_installation_block() {
       print "    <version>" version "</version>"
       print "</plugin>"
       print "```"
+      print ""
+      if (language == "de") {
+        print "Für Spring-Boot-Autokonfiguration:"
+      } else {
+        print "For Spring Boot auto-configuration:"
+      }
+      print ""
+      print "```xml"
+      print "<dependency>"
+      print "    <groupId>dev.feit</groupId>"
+      print "    <artifactId>slop4j-spring-boot-starter</artifactId>"
+      print "    <version>" version "</version>"
+      print "</dependency>"
+      print "```"
     }
     $0 == start {
       print

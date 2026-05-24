@@ -21,6 +21,7 @@ This guide helps future agent sessions understand the non-obvious architecture c
 * **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.
 * **JSpecify for Nullability:** Use JSpecify annotations (such as `@NullMarked` and `@Nullable`) to define clear nullability contracts. These must be added with `provided` scope in Maven, ensuring zero runtime footprint.
 * **Code Formatting (Spotless):** All Java files must be formatted using Spotless. Do not manually format or commit unformatted code.
+* **Agent Markdown Artifacts:** When creating Markdown files for agent workflows, such as plans, designs, reviews, or implementation notes, place them under the `.ai/` directory.
 * **Java Version:** Target Java 17. Use modern features like records, sealed classes, pattern matching, and text blocks where appropriate.
 * **API Visibility:** Only classes directly in the `dev.feit.slop4j` package are public (`SlopAnalyzer`, `SlopReport`, etc.). Everything under `dev.feit.slop4j.internal` must be package-private or internal.
 * **Automatic-Module-Name:** `dev.feit.slop4j` must be configured in the Maven build.
