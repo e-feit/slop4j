@@ -23,7 +23,7 @@ Das Framework prüft keine sachliche Korrektheit. Der Fokus liegt auf der Erkenn
 <!-- slop4j-installation:start -->
 Aktuelle Version: `0.2.1`.
 
-### Core-Bibliothek
+Core-Bibliothek:
 
 ```xml
 <dependency>
@@ -33,7 +33,7 @@ Aktuelle Version: `0.2.1`.
 </dependency>
 ```
 
-### AssertJ-Assertions
+AssertJ-Assertions für Tests:
 
 ```xml
 <dependency>
@@ -44,7 +44,7 @@ Aktuelle Version: `0.2.1`.
 </dependency>
 ```
 
-### Maven-Plugin
+Maven-Plugin:
 
 ```xml
 <plugin>
@@ -54,7 +54,7 @@ Aktuelle Version: `0.2.1`.
 </plugin>
 ```
 
-### Spring-Boot-Starter
+Spring-Boot-Starter:
 
 ```xml
 <dependency>
