@@ -25,5 +25,6 @@
         <module>assertj-usage</module>
         <module>maven-plugin-usage</module>
         <module>cli-usage</module>
+        <module>spring-boot-starter-usage</module>
     </modules>
 </project>

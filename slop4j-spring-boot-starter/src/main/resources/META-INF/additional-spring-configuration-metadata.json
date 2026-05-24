@@ -1,0 +1,31 @@
+{
+  "properties": [
+    {
+      "name": "slop4j.languages",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Analyzer languages. Supported values are en, english, de, german and deutsch.",
+      "defaultValue": ["en"]
+    },
+    {
+      "name": "slop4j.max-finding-evidence-length",
+      "type": "java.lang.Integer",
+      "description": "Maximum evidence text length included in findings.",
+      "defaultValue": 120
+    }
+  ],
+  "hints": [
+    {
+      "name": "slop4j.languages",
+      "values": [
+        {
+          "value": "en",
+          "description": "English analyzer dictionary."
+        },
+        {
+          "value": "de",
+          "description": "German analyzer dictionary."
+        }
+      ]
+    }
+  ]
+}
