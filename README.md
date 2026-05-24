@@ -84,8 +84,17 @@ SlopReport report = analyzer.analyze("""
     We leverage agentic AI to unlock seamless enterprise-grade transformation.
     """);
 
-System.out.println(report.slopScore()); // 56.4
-System.out.println(report.verdict());  // TOTAL_CORPORATE_NOTHINGNESS
+System.out.println(report.slopScore());
+System.out.println(report.verdict());
+System.out.println(report.findings());
+```
+
+For the input shown above, the output provides deterministic governance signals:
+
+```text
+56.4
+TOTAL_CORPORATE_NOTHINGNESS
+[SlopFinding[type=BUZZWORD_DENSITY, severity=WARNING, message=Buzzword density is suspiciously high., evidence=leverage, agentic, unlock, seamless, enterprise-grade, transformation]]
 ```
 
 ## AssertJ Assertions
@@ -95,8 +104,9 @@ The `slop4j-assertj` module provides high-level assertions to enforce narrative 
 ```java
 import static dev.feit.slop4j.assertj.SlopAssertions.assertThatSlop;
 
-assertThatSlop(readme, Language.ENGLISH)
+assertThatSlop(readme, Language.ENGLISH, Language.GERMAN)
     .hasSlopScoreBelow(40.0)
+    .hasActionabilityScoreAbove(0.5)
     .containsConcreteDetails();
 ```
 
@@ -105,22 +115,39 @@ For advanced governance, use specific strategic alignment conditions:
 ```java
 assertThatSlop(strategyDeck)
     .isBoardDeckReady() // High slop, zero implementation details
+    .containsNoImplementationDetails()
     .maximizesPlausibleDeniability();
 ```
 
 ## Maven Plugin
 
-The `slop4j-maven-plugin` audits documentation files (READMEs, ADRs, etc.) during the build process to prevent "dangerously concrete" content from entering the codebase.
+The `slop4j-maven-plugin` audits documentation files during the build process to prevent "dangerously concrete" content from entering the codebase.
 
 ```xml
-<configuration>
-    <maxSlopScore>60.0</maxSlopScore>
-    <failOnSlop>true</failOnSlop>
-    <includes>
-        <include>README.md</include>
-        <include>docs/**/*.md</include>
-    </includes>
-</configuration>
+<plugin>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-maven-plugin</artifactId>
+    <version>0.2.1</version><!-- slop4j-release-version -->
+    <configuration>
+        <maxSlopScore>60.0</maxSlopScore>
+        <languages>
+            <language>en</language>
+            <language>de</language>
+        </languages>
+        <includes>
+            <include>README.md</include>
+            <include>docs/**/*.md</include>
+        </includes>
+        <failOnSlop>true</failOnSlop>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>audit</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 ```
 
 Strict governance profiles can also enforce a *minimum* slop level to ensure that documentation remains sufficiently "high-level" and "strategic":
@@ -132,21 +159,88 @@ Strict governance profiles can also enforce a *minimum* slop level to ensure tha
 </configuration>
 ```
 
+### Configuration Parameters
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `maxSlopScore` | `60.0` | Maximum allowed score when `failOnSlop` is enabled. |
+| `minSlopScore` | `80.0` | Minimum required score when `failIfTooConcrete` is enabled. |
+| `failOnSlop` | `true` | Fails the build when any scanned file exceeds `maxSlopScore`. |
+| `failIfTooConcrete` | `false` | Fails the build when any scanned file is below `minSlopScore`. |
+| `languages` | `en` | Analyzer languages (`en`, `de`). |
+| `includes` | `README.md`, ... | Project-relative glob patterns to scan. |
+| `excludes` | `target/**`, ... | Patterns to ignore. |
+| `skip` | `false` | Skips execution (User property: `slop4j.skip`). |
+| `failIfNoFiles` | `false` | Fails the build when no files match. |
+| `maxFindingsPerFile` | `5` | Maximum number of findings printed per file. |
+
+## Spring Boot Starter
+
+The starter provides auto-configuration for the `SlopAnalyzer`. Adding the dependency is sufficient for the default English analyzer.
+
+```java
+@RestController
+class SlopController {
+    private final SlopAnalyzer slopAnalyzer;
+
+    SlopController(SlopAnalyzer slopAnalyzer) {
+        this.slopAnalyzer = slopAnalyzer;
+    }
+
+    @PostMapping("/slop/analyze")
+    SlopReport analyze(@RequestBody String text) {
+        return slopAnalyzer.analyze(text);
+    }
+}
+```
+
+Configuration via `application.yaml`:
+
+```yaml
+slop4j:
+  languages:
+    - en
+    - de
+  max-finding-evidence-length: 120
+```
+
+## CLI
+
+`slop4j-cli` provides the same deterministic audit workflow for CI jobs and pre-commit hooks that require a process exit code.
+
+```bash
+mvn -pl slop4j-cli -am package
+./scripts/slop4j audit README.md --lang en,de --max-score 60
+```
+
+The CLI returns `0` for success, `1` for policy violations, `2` for usage errors and `3` for I/O errors.
+
 ## Score Definitions
 
+`slopScore` ranges from `0.0` to `100.0`. Components are normalized from `0.0` to `1.0`:
+
 - `buzzwordDensity`: Frequency of high-value, low-meaning corporate jargon.
-- `concretenessScore`: Detection of specific details that might limit strategic optionality.
+- `vaguePhraseDensity`: Usage of words that reduce narrative precision.
+- `concretenessScore`: Presence of specific details that might limit strategic optionality.
 - `actionabilityScore`: Presence of actual executable steps vs. vague aspirations.
+- `evidenceScore`: Presence of supporting claims or data points.
+- `repetitionScore`: Frequency of redundant phrasing.
 - `overconfidenceScore`: Frequency of absolute claims lacking supporting evidence.
 
 ## Governance Verdicts
 
 - `CLEAN`: No significant slop detected; potentially dangerously useful.
+- `ACCEPTABLY_FLUFFY`: Limited generic language within acceptable governance bounds.
+- `SLOP_ADJACENT`: Sufficient indicators to require a strategic review.
 - `TOTAL_CORPORATE_NOTHINGNESS`: A perfect vacuum of meaning; optimized for high-level alignment.
+- `LINKEDIN_READY`: High concentration of overly polished, generic patterns.
 - `PREMIUM_POLISHED_GARBAGE`: Grammatically perfect content that adds zero value.
 - `BOARD_APPROVED_SLOP`: High-severity genericism; ideal for external-facing transformation narratives.
+- `GARBAGE_IN_SLOP_OUT`: Result of a direct, unfiltered prompt-to-output pipeline.
+- `CERTIFIED_BRAINLESS_SLOP`: The ultimate peak of content-free existence.
+- `DANGEROUSLY_USEFUL`: Low slop combined with high concreteness and actionability.
 - `BRAIN_FREE_ZONE`: High confidence combined with near-zero evidence; hallmark of advanced stochastic hallucination.
 
 ## Limitations
 
-`slop4j` is not a fact-checker. It reports deterministic linguistic signals associated with generic AI output. It will not tell you if the AI is lying, only if it is being professionally vague.
+`slop4j` is not a fact-checker or a grammar engine. It reports deterministic linguistic signals associated with generic AI output. It will not tell you if the AI is lying, only if it is being professionally vague.
