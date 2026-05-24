@@ -57,6 +57,16 @@ For Maven build audits:
     <version>0.1.2</version>
 </plugin>
 ```
+
+For Spring Boot auto-configuration:
+
+```xml
+<dependency>
+    <groupId>dev.feit</groupId>
+    <artifactId>slop4j-spring-boot-starter</artifactId>
+    <version>0.1.2</version>
+</dependency>
+```
 <!-- slop4j-installation:end -->
 
 The Java package and automatic module name are both `dev.feit.slop4j`.
@@ -179,6 +189,42 @@ Configuration parameters:
 | `failIfNoFiles` | `false` | Fails the build when no files match. |
 | `maxFindingsPerFile` | `5` | Maximum number of findings printed per file. |
 | `maxFindingEvidenceLength` | `120` | Maximum evidence text length used by the analyzer. |
+
+## Spring Boot Starter
+
+`slop4j-spring-boot-starter` provides auto-configuration for applications that
+want to inject `SlopAnalyzer` as a Spring bean. Adding the dependency is enough
+for the default English analyzer.
+
+```java
+@RestController
+class SlopController {
+
+    private final SlopAnalyzer slopAnalyzer;
+
+    SlopController(SlopAnalyzer slopAnalyzer) {
+        this.slopAnalyzer = slopAnalyzer;
+    }
+
+    @PostMapping("/slop/analyze")
+    SlopReport analyze(@RequestBody String text) {
+        return slopAnalyzer.analyze(text);
+    }
+}
+```
+
+Optional analyzer configuration:
+
+```yaml
+slop4j:
+  languages:
+    - en
+    - de
+  max-finding-evidence-length: 120
+```
+
+Applications can provide their own `SlopAnalyzer` bean to replace the default
+auto-configured analyzer.
 
 ## CLI
 
