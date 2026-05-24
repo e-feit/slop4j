@@ -11,7 +11,7 @@
 
     <name>slop4j</name>
     <description>Deterministic AI output quality analysis for Java applications.</description>
-    <url>https://gitlab.com/vrdrv/slop4j</url>
+    <url>https://github.com/e-feit/slop4j</url>
 
     <licenses>
         <license>
@@ -23,16 +23,16 @@
 
     <developers>
         <developer>
-            <id>vrdrv</id>
+            <id>e-feit</id>
             <name>Eugen Feit</name>
-            <url>https://gitlab.com/vrdrv</url>
+            <url>https://github.com/e-feit</url>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:https://gitlab.com/vrdrv/slop4j.git</connection>
-        <developerConnection>scm:git:ssh://git@gitlab.com/vrdrv/slop4j.git</developerConnection>
-        <url>https://gitlab.com/vrdrv/slop4j</url>
+        <connection>scm:git:https://github.com/e-feit/slop4j.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/e-feit/slop4j.git</developerConnection>
+        <url>https://github.com/e-feit/slop4j</url>
         <tag>HEAD</tag>
     </scm>
 
