@@ -31,11 +31,11 @@ replace_installation_block() {
       if (language == "de") {
         print "Aktuelle Version: `" version "`."
         print ""
-        print "Core-Bibliothek:"
+        print "### Core-Bibliothek"
       } else {
         print "Latest version: `" version "`."
         print ""
-        print "Core library:"
+        print "### Core Library"
       }
       print ""
       print "```xml"
@@ -47,9 +47,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "AssertJ-Assertions für Tests:"
+        print "### AssertJ-Assertions"
       } else {
-        print "AssertJ assertions for testing:"
+        print "### AssertJ Assertions"
       }
       print ""
       print "```xml"
@@ -62,9 +62,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "Maven-Plugin:"
+        print "### Maven-Plugin"
       } else {
-        print "Maven plugin:"
+        print "### Maven Plugin"
       }
       print ""
       print "```xml"
@@ -76,9 +76,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "Spring-Boot-Starter:"
+        print "### Spring-Boot-Starter"
       } else {
-        print "Spring Boot starter:"
+        print "### Spring Boot Starter"
       }
       print ""
       print "```xml"

@@ -23,7 +23,7 @@ The library does not verify factual accuracy. It focuses on detecting "textual s
 <!-- slop4j-installation:start -->
 Latest version: `0.2.1`.
 
-Core library:
+### Core Library
 
 ```xml
 <dependency>
@@ -33,7 +33,7 @@ Core library:
 </dependency>
 ```
 
-AssertJ assertions for testing:
+### AssertJ Assertions
 
 ```xml
 <dependency>
@@ -44,7 +44,7 @@ AssertJ assertions for testing:
 </dependency>
 ```
 
-Maven plugin:
+### Maven Plugin
 
 ```xml
 <plugin>
@@ -54,7 +54,7 @@ Maven plugin:
 </plugin>
 ```
 
-Spring Boot starter:
+### Spring Boot Starter
 
 ```xml
 <dependency>
