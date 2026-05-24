@@ -136,7 +136,9 @@ Das `slop4j-maven-plugin` prüft Dokumentationsdateien (READMEs, ADRs etc.) wäh
         </languages>
         <includes>
             <include>README.md</include>
+            <include>README_DE.md</include>
             <include>docs/**/*.md</include>
+            <include>adr/**/*.md</include>
         </includes>
         <failOnSlop>true</failOnSlop>
     </configuration>
@@ -205,16 +207,32 @@ slop4j:
   max-finding-evidence-length: 120
 ```
 
+Anwendungen können eine eigene `SlopAnalyzer`-Bean bereitstellen, um den automatisch konfigurierten Analyzer zu ersetzen.
+
 ## CLI
 
 `slop4j-cli` bietet denselben deterministischen Audit-Workflow für CI-Jobs und Pre-Commit-Hooks, die einen Prozess-Exit-Code benötigen.
 
 ```bash
 mvn -pl slop4j-cli -am package
-./scripts/slop4j audit README_DE.md --lang en,de --max-score 60
+./scripts/slop4j audit README.md README_DE.md --lang en,de --max-score 60
 ```
 
+Setzen Sie `SLOP4J_REBUILD=1`, um den Wrapper zu zwingen, das JAR vor der Ausführung neu zu bauen.
+
 Die CLI gibt `0` für Erfolg, `1` für Policy-Verletzungen, `2` für Nutzungsfehler und `3` für I/O-Fehler zurück.
+
+## Unterstützte Sprachen
+
+Der Analyzer enthält Wörterbücher für Englisch und Deutsch. Weitere Sprachen können explizit über den Builder aktiviert werden:
+
+```java
+SlopAnalyzer analyzer = SlopAnalyzer.builder()
+    .languages(Language.ENGLISH, Language.GERMAN)
+    .build();
+```
+
+Bei Aktivierung mehrerer Sprachen werden die entsprechenden Lexika für die Analyse-Session zusammengeführt. Es erfolgt keine automatische Spracherkennung; alle aktivierten Wörterbücher werden simultan geprüft, um sicherzustellen, dass kein Slop der Governance entgeht.
 
 ## Score-Definitionen
 
