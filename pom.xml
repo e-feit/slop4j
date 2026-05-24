@@ -365,6 +365,7 @@
                                 <excludeArtifact>assertj-usage</excludeArtifact>
                                 <excludeArtifact>maven-plugin-usage</excludeArtifact>
                                 <excludeArtifact>cli-usage</excludeArtifact>
+                                <excludeArtifact>slop4j-example-spring-boot-starter-usage</excludeArtifact>
                             </excludeArtifacts>
                         </configuration>
                     </plugin>
