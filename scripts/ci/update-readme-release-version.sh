@@ -29,13 +29,13 @@ replace_installation_block() {
   awk -v start="$start" -v end="$end" -v version="$release_version" -v language="$language" '
     function print_block() {
       if (language == "de") {
-        print "Aktuell veröffentlichte Version: `" version "`."
+        print "Aktuelle Version: `" version "`."
         print ""
-        print "Für die Core-Bibliothek:"
+        print "### Core-Bibliothek"
       } else {
-        print "Latest published version: `" version "`."
+        print "Latest version: `" version "`."
         print ""
-        print "For the core library:"
+        print "### Core Library"
       }
       print ""
       print "```xml"
@@ -47,9 +47,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "Für AssertJ-Assertions in Tests:"
+        print "### AssertJ-Assertions"
       } else {
-        print "For AssertJ assertions in tests:"
+        print "### AssertJ Assertions"
       }
       print ""
       print "```xml"
@@ -62,9 +62,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "Für Maven-Build-Audits:"
+        print "### Maven-Plugin"
       } else {
-        print "For Maven build audits:"
+        print "### Maven Plugin"
       }
       print ""
       print "```xml"
@@ -76,9 +76,9 @@ replace_installation_block() {
       print "```"
       print ""
       if (language == "de") {
-        print "Für Spring-Boot-Autokonfiguration:"
+        print "### Spring-Boot-Starter"
       } else {
-        print "For Spring Boot auto-configuration:"
+        print "### Spring Boot Starter"
       }
       print ""
       print "```xml"

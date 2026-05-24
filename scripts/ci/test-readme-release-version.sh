@@ -65,7 +65,11 @@ assert_not_contains() {
 
 SLOP4J_README_ROOT="$tmp_dir" "${script_dir}/update-readme-release-version.sh" "1.2.3"
 
-assert_contains "$tmp_dir/README.md" "Latest published version: \`1.2.3\`."
+assert_contains "$tmp_dir/README.md" "Latest version: \`1.2.3\`."
+assert_contains "$tmp_dir/README.md" "### Core Library"
+assert_contains "$tmp_dir/README.md" "### AssertJ Assertions"
+assert_contains "$tmp_dir/README.md" "### Maven Plugin"
+assert_contains "$tmp_dir/README.md" "### Spring Boot Starter"
 assert_contains "$tmp_dir/README.md" "<artifactId>slop4j-core</artifactId>"
 assert_contains "$tmp_dir/README.md" "<artifactId>slop4j-assertj</artifactId>"
 assert_contains "$tmp_dir/README.md" "<artifactId>slop4j-maven-plugin</artifactId>"
@@ -73,7 +77,11 @@ assert_contains "$tmp_dir/README.md" "<artifactId>slop4j-spring-boot-starter</ar
 assert_contains "$tmp_dir/README.md" "<version>1.2.3</version><!-- slop4j-release-version -->"
 assert_not_contains "$tmp_dir/README.md" "stale"
 
-assert_contains "$tmp_dir/README_DE.md" "Aktuell veröffentlichte Version: \`1.2.3\`."
+assert_contains "$tmp_dir/README_DE.md" "Aktuelle Version: \`1.2.3\`."
+assert_contains "$tmp_dir/README_DE.md" "### Core-Bibliothek"
+assert_contains "$tmp_dir/README_DE.md" "### AssertJ-Assertions"
+assert_contains "$tmp_dir/README_DE.md" "### Maven-Plugin"
+assert_contains "$tmp_dir/README_DE.md" "### Spring-Boot-Starter"
 assert_contains "$tmp_dir/README_DE.md" "<artifactId>slop4j-core</artifactId>"
 assert_contains "$tmp_dir/README_DE.md" "<artifactId>slop4j-assertj</artifactId>"
 assert_contains "$tmp_dir/README_DE.md" "<artifactId>slop4j-maven-plugin</artifactId>"

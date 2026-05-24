@@ -6,30 +6,26 @@
   <img src="img/slop4j.png" alt="slop4j logo" width="240">
 </p>
 
-Enterprise-grade AI-Slop-Erkennung für JVM-basierte Transformationsnarrative.
+Enterprise-grade AI-Output-Governance und deterministische Slop-Mitigation für JVM-basierte Transformationsnarrative.
 
-## Was es macht
+## Überblick
 
-`slop4j` bietet deterministische Analyse für Texte, die vage, generische,
-übermäßig selbstsichere oder unzureichend handlungsorientierte AI-generierte
-Inhalte enthalten können. Es verwendet lokale regelbasierte Heuristiken,
-Sprachwörterbücher und die Erkennung konkreter Anker. Es ruft keinen externen
-Dienst auf.
+`slop4j` bietet ein robustes, deterministisches Framework für das Audit von AI-generierten Inhalten. Es identifiziert hohe Konzentrationen vager Formulierungen, unbegründeter Selbstsicherheit und mangelnder Handlungsorientierung – typische Indikatoren für Texte mit geringer kognitiver Beteiligung.
 
-`slop4j` überprüft keine sachliche Korrektheit. Es erkennt textuelle Merkmale,
-die häufig mit vagen, generischen oder übermäßig selbstsicheren AI-generierten
-Inhalten verbunden sind.
+Durch die Verwendung lokaler, regelbasierter Heuristiken und validierter Sprachwörterbücher ermöglicht `slop4j` Organisationen, ihr „Strategic Alignment“ abzusichern, ohne auf externe API-Aufrufe oder nicht-deterministische „KI-prüft-KI“-Analysen angewiesen zu sein.
+
+Der Fokus liegt exklusiv auf „textuellen Smells“ – Merkmalen generischer Phrasierung, die den strategischen Nutzwert von Dokumentationen, ADRs und Transformations-Roadmaps mindern.
 
 ## Anforderungen
 
-`slop4j` benötigt Java 17 oder höher.
+- Java 17 oder höher
 
 ## Installation
 
 <!-- slop4j-installation:start -->
-Aktuell veröffentlichte Version: `0.2.1`.
+Aktuelle Version: `0.2.1`.
 
-Für die Core-Bibliothek:
+### Core-Bibliothek
 
 ```xml
 <dependency>
@@ -39,7 +35,7 @@ Für die Core-Bibliothek:
 </dependency>
 ```
 
-Für AssertJ-Assertions in Tests:
+### AssertJ-Assertions
 
 ```xml
 <dependency>
@@ -50,7 +46,7 @@ Für AssertJ-Assertions in Tests:
 </dependency>
 ```
 
-Für Maven-Build-Audits:
+### Maven-Plugin
 
 ```xml
 <plugin>
@@ -60,7 +56,7 @@ Für Maven-Build-Audits:
 </plugin>
 ```
 
-Für Spring-Boot-Autokonfiguration:
+### Spring-Boot-Starter
 
 ```xml
 <dependency>
@@ -71,8 +67,7 @@ Für Spring-Boot-Autokonfiguration:
 ```
 <!-- slop4j-installation:end -->
 
-Das Java-Package und der automatische Modulname lauten beide
-`dev.feit.slop4j`.
+Das Java-Package und der automatische Modulname lauten `dev.feit.slop4j`.
 
 ## Quick Start
 
@@ -94,7 +89,7 @@ System.out.println(report.verdict());
 System.out.println(report.findings());
 ```
 
-Für den oben gezeigten Input sähe die Ausgabe ungefähr so aus:
+Die Ausgabe liefert deterministische Governance-Signale für den bereitgestellten Input:
 
 ```text
 56.4
@@ -102,18 +97,11 @@ TOTAL_CORPORATE_NOTHINGNESS
 [SlopFinding[type=BUZZWORD_DENSITY, severity=WARNING, message=Buzzword density is suspiciously high., evidence=leverage, agentic, unlock, seamless, enterprise-grade, transformation]]
 ```
 
-## AssertJ Assertions
+## AssertJ-Assertions
 
-Für Tests stellt das Modul `slop4j-assertj` AssertJ-Assertions bereit, wenn der
-Source-Checkout lokal verwendet wird.
-
-Das AssertJ-Modul basiert auf `slop4j-core`. Es führt keine eigene
-Analyse-Logik ein, sondern bildet Core-`SlopReport`-Werte auf deterministische
-Testbedingungen ab.
+Das Modul `slop4j-assertj` bietet High-Level-Assertions, um Qualitätsstandards für Narrative in automatisierten Tests durchzusetzen.
 
 ```java
-import dev.feit.slop4j.Language;
-
 import static dev.feit.slop4j.assertj.SlopAssertions.assertThatSlop;
 
 assertThatSlop(readme, Language.ENGLISH, Language.GERMAN)
@@ -122,21 +110,18 @@ assertThatSlop(readme, Language.ENGLISH, Language.GERMAN)
     .containsConcreteDetails();
 ```
 
-Convenience-Methoden sind dokumentierte Aliase über Score-, Verdict- und
-Finding-Bedingungen:
+Für fortgeschrittene Governance können spezifische Bedingungen für das „Strategic Alignment“ genutzt werden:
 
 ```java
 assertThatSlop(strategyDeck)
-    .isBoardDeckReady()
+    .isBoardDeckReady() // Hoher Slop-Anteil, keine Implementierungsdetails
     .containsNoImplementationDetails()
     .maximizesPlausibleDeniability();
 ```
 
-## Maven Plugin
+## Maven-Plugin
 
-`slop4j-maven-plugin` prüft README-Dateien, ADRs und Markdown-Dokumentation
-während des Maven-Builds. Es verwendet denselben deterministischen Analyzer wie
-`slop4j-core` und ruft keinen externen Dienst auf.
+Das `slop4j-maven-plugin` prüft Dokumentationsdateien (READMEs, ADRs etc.) während des Build-Prozesses, um zu verhindern, dass „gefährlich konkrete“ Inhalte in die Codebasis gelangen.
 
 ```xml
 <plugin>
@@ -167,9 +152,7 @@ während des Maven-Builds. Es verwendet denselben deterministischen Analyzer wie
 </plugin>
 ```
 
-Für Governance-Profile, die ein Mindestmaß an strategischer Abstraktion
-erfordern, kann das Plugin auch fehlschlagen, wenn Dokumentation zu konkret
-wird:
+Strikte Governance-Profile können zudem einen *minimalen* Slop-Level erzwingen, um sicherzustellen, dass die Dokumentation ausreichend „High-Level“ und „strategisch“ bleibt:
 
 ```xml
 <configuration>
@@ -178,32 +161,29 @@ wird:
 </configuration>
 ```
 
-Konfigurationsparameter:
+### Konfigurationsparameter
 
 | Parameter | Standardwert | Beschreibung |
 | --- | --- | --- |
-| `maxSlopScore` | `60.0` | Maximal erlaubter Score, wenn `failOnSlop` aktiviert ist. |
-| `minSlopScore` | `80.0` | Minimal erforderlicher Score, wenn `failIfTooConcrete` aktiviert ist. |
-| `failOnSlop` | `true` | Lässt den Build fehlschlagen, wenn eine gescannte Datei `maxSlopScore` überschreitet. |
-| `failIfTooConcrete` | `false` | Lässt den Build fehlschlagen, wenn eine gescannte Datei unter `minSlopScore` liegt. |
-| `languages` | `en` | Analyzer-Sprachen. Unterstützte Werte: `en`, `english`, `de`, `german`, `deutsch`. |
-| `includes` | `README.md`, `README_DE.md`, `docs/**/*.md`, `adr/**/*.md` | Projektrelative Glob-Pattern für zu scannende Dateien. |
-| `excludes` | `target/**`, `.git/**` | Projektrelative Glob-Pattern, die nach dem Include-Matching ignoriert werden. |
-| `skip` | `false` | Überspringt die Ausführung. User-Property: `slop4j.skip`. |
-| `failIfNoFiles` | `false` | Lässt den Build fehlschlagen, wenn keine Dateien gefunden werden. |
-| `maxFindingsPerFile` | `5` | Maximale Anzahl ausgegebener Findings pro Datei. |
-| `maxFindingEvidenceLength` | `120` | Maximale Evidence-Textlänge für den Analyzer. |
+| `maxSlopScore` | `60.0` | Obergrenze für zulässigen Slop vor einer Governance-Intervention (Build-Fehler). |
+| `minSlopScore` | `80.0` | Erforderlicher Mindest-Slop zur Aufrechterhaltung der strategischen Abstraktionsebene. |
+| `failOnSlop` | `true` | Erzwingt einen Build-Fehler, wenn die narrative Präzision den `maxSlopScore` überschreitet. |
+| `failIfTooConcrete` | `false` | Schützt die strategische Flexibilität durch Build-Abbruch bei gefährlich konkreten Inhalten. |
+| `languages` | `en` | Ziel-Sprachräume für das narrative Audit. Unterstützt: `en`, `english`, `de`, `german`, `deutsch`. |
+| `includes` | `README.md`, `README_DE.md`, `docs/**/*.md`, `adr/**/*.md` | Projektrelative Glob-Pattern für die Einbeziehung in das Governance-Audit. |
+| `excludes` | `target/**`, `.git/**` | Pfad-Muster, die vom Audit-Prozess ausgeschlossen werden sollen. |
+| `skip` | `false` | Umgeht das Governance-Audit. Kann auch via `-Dslop4j.skip` gesteuert werden. |
+| `failIfNoFiles` | `false` | Löst einen Fehler aus, falls keine relevanten Dokumente für den Scan identifiziert wurden. |
+| `maxFindingsPerFile` | `5` | Maximale Anzahl an gemeldeten „Textual Smells“ pro individueller Datei. |
+| `maxFindingEvidenceLength` | `120` | Zeichenlimit für extrahierte Belegfragmente im Governance-Reporting. |
 
-## Spring Boot Starter
+## Spring-Boot-Starter
 
-`slop4j-spring-boot-starter` stellt Autokonfiguration für Anwendungen bereit,
-die `SlopAnalyzer` als Spring-Bean injizieren wollen. Die Dependency reicht für
-den englischen Standard-Analyzer aus.
+Der Starter bietet Autokonfiguration für den `SlopAnalyzer`. Das Hinzufügen der Dependency reicht für den englischen Standard-Analyzer aus.
 
 ```java
 @RestController
 class SlopController {
-
     private final SlopAnalyzer slopAnalyzer;
 
     SlopController(SlopAnalyzer slopAnalyzer) {
@@ -217,7 +197,7 @@ class SlopController {
 }
 ```
 
-Optionale Analyzer-Konfiguration:
+Konfiguration über `application.yaml`:
 
 ```yaml
 slop4j:
@@ -227,33 +207,24 @@ slop4j:
   max-finding-evidence-length: 120
 ```
 
-Anwendungen können eine eigene `SlopAnalyzer`-Bean bereitstellen, um den
-automatisch konfigurierten Analyzer zu ersetzen.
+Anwendungen können eine eigene `SlopAnalyzer`-Bean bereitstellen, um den automatisch konfigurierten Analyzer zu ersetzen.
 
 ## CLI
 
-`slop4j-cli` stellt denselben deterministischen Audit-Workflow bereit, ohne eine
-Maven-Plugin-Ausführung vorauszusetzen. Die CLI ist für lokale Prüfungen,
-CI-Jobs und Pre-Commit-Hooks vorgesehen, die einen Prozess-Exit-Code benötigen.
-
-Nach dem lokalen Build des Source-Checkouts:
+`slop4j-cli` bietet denselben deterministischen Audit-Workflow für CI-Jobs und Pre-Commit-Hooks, die einen Prozess-Exit-Code benötigen.
 
 ```bash
 mvn -pl slop4j-cli -am package
 ./scripts/slop4j audit README.md README_DE.md --lang en,de --max-score 60
 ```
 
-Mit `SLOP4J_REBUILD=1` erzwingt der Wrapper vor der Ausführung einen neuen
-Jar-Build.
+Setzen Sie `SLOP4J_REBUILD=1`, um den Wrapper zu zwingen, das JAR vor der Ausführung neu zu bauen.
 
-Die CLI gibt `0` zurück, wenn keine Policy verletzt wurde, `1` bei
-Slop-Policy-Verletzungen, `2` bei Nutzungsfehlern und `3` bei Datei-I/O-Fehlern.
+Die CLI gibt `0` für Erfolg, `1` für Policy-Verletzungen, `2` für Nutzungsfehler und `3` für I/O-Fehler zurück.
 
 ## Unterstützte Sprachen
 
-Der Analyzer unterstützt englische und deutsche Wörterbücher. Der
-Standard-Analyzer verwendet Englisch. Weitere Sprachen können explizit
-konfiguriert werden:
+Der Analyzer enthält Wörterbücher für Englisch und Deutsch. Weitere Sprachen können explizit über den Builder aktiviert werden:
 
 ```java
 SlopAnalyzer analyzer = SlopAnalyzer.builder()
@@ -261,51 +232,34 @@ SlopAnalyzer analyzer = SlopAnalyzer.builder()
     .build();
 ```
 
-Wenn mehrere Sprachen aktiv sind, werden ihre Wörterbücher zusammengeführt. Es
-gibt keine automatische Spracherkennung.
+Bei Aktivierung mehrerer Sprachen werden die entsprechenden Lexika für die Analyse-Session zusammengeführt. Es erfolgt keine automatische Spracherkennung; alle aktivierten Wörterbücher werden simultan geprüft, um sicherzustellen, dass kein Slop der Governance entgeht.
 
-## Scores
+## Score-Definitionen
 
-`slopScore` wird von `0.0` bis `100.0` ausgegeben. Alle anderen Scores sind von
-`0.0` bis `1.0` normalisiert:
+Der `slopScore` reicht von `0.0` bis `100.0`. Die Einzel-Scores sind zwischen `0.0` und `1.0` normalisiert:
 
-- `buzzwordDensity`
-- `vaguePhraseDensity`
-- `concretenessScore`
-- `actionabilityScore`
-- `evidenceScore`
-- `repetitionScore`
-- `overconfidenceScore`
+- `buzzwordDensity`: Häufigkeit von wertvollem, aber inhaltsleerem Management-Jargon.
+- `vaguePhraseDensity`: Verwendung von Wörtern, die die narrative Präzision mindern.
+- `concretenessScore`: Vorhandensein spezifischer Details, die die strategische Flexibilität einschränken könnten.
+- `actionabilityScore`: Vorhandensein tatsächlicher Handlungsschritte vs. vager Aspirationen.
+- `evidenceScore`: Vorhandensein von stützenden Belegen oder Datenpunkten.
+- `repetitionScore`: Häufigkeit redundanter Phrasierung.
+- `overconfidenceScore`: Häufigkeit absoluter Behauptungen ohne stützende Belege.
 
-## Verdicts
+## Governance Verdicts
 
-- `CLEAN`: keine wesentlichen Slop-Indikatoren; unterhalb der niedrigsten
-  regulären Score-Schwelle.
-- `ACCEPTABLY_FLUFFY`: begrenzte generische oder schwach handlungsorientierte
-  Sprache innerhalb eines akzeptablen Score-Bereichs.
-- `SLOP_ADJACENT`: ausreichend Slop-Indikatoren für eine Prüfung, aber nicht
-  genug für ein Narrativrisiko mit hoher Schwere.
-- `TOTAL_CORPORATE_NOTHINGNESS`: ein inhaltliches Vakuum, perfekt optimiert für
-  Umgebungen, in denen Nichtssagen die sicherste Strategie ist.
-- `LINKEDIN_READY`: eine hohe Konzentration vager, generischer oder übermäßig
-  polierter Sprachmuster.
-- `PREMIUM_POLISHED_GARBAGE`: Hochglanz-Müll; grammatikalisch einwandfrei, aber
-  vollständig ohne inhaltlichen Wert.
-- `BOARD_APPROVED_SLOP`: der höchste reguläre Slop-Score-Bereich, dominiert von
-  generischer, wenig spezifischer oder unzureichend handlungsorientierter
-  Sprache.
-- `GARBAGE_IN_SLOP_OUT`: das Ergebnis einer direkten Pipeline von einem minderwertigen
-  Prompt zu einem ungefilterten Output.
-- `CERTIFIED_BRAINLESS_SLOP`: der absolute Gipfel des Slops; keinerlei Anzeichen
-  kognitiver Beteiligung, rein inhaltsfreie Existenz.
-- `DANGEROUSLY_USEFUL`: ein niedriger Slop-Score kombiniert mit starken Signalen
-  für Konkretheit und Handlungsorientierung.
-- `BRAIN_FREE_ZONE`: extreme Selbstsicherheit bei nahezu null Belegen; Merkmal
-  fortgeschrittener stochastischer Halluzination.
+- `CLEAN`: Kein signifikanter Slop erkannt; potenziell gefährlich nützlich.
+- `ACCEPTABLY_FLUFFY`: Begrenzte generische Sprache innerhalb akzeptabler Governance-Grenzen.
+- `SLOP_ADJACENT`: Ausreichend Indikatoren für eine notwendige strategische Prüfung.
+- `TOTAL_CORPORATE_NOTHINGNESS`: Ein perfektes Vakuum an Bedeutung; optimiert für High-Level-Alignment.
+- `LINKEDIN_READY`: Hohe Konzentration überpolierter, generischer Muster.
+- `PREMIUM_POLISHED_GARBAGE`: Grammatikalisch perfekter Inhalt ohne jeden Nutzwert.
+- `BOARD_APPROVED_SLOP`: Hochgradige Generik; ideal für externe Transformationsnarrative.
+- `GARBAGE_IN_SLOP_OUT`: Ergebnis einer direkten, ungefilterten Prompt-to-Output-Pipeline.
+- `CERTIFIED_BRAINLESS_SLOP`: Der absolute Gipfel inhaltleerer Existenz.
+- `DANGEROUSLY_USEFUL`: Niedriger Slop kombiniert mit hoher Konkretheit und Handlungsorientierung.
+- `BRAIN_FREE_ZONE`: Extreme Selbstsicherheit bei nahezu null Belegen; Merkmal fortgeschrittener stochastischer Halluzination.
 
 ## Grenzen
 
-`slop4j` ist kein Halluzinationsdetektor, Grammatikprüfer, Quellenverifizierer
-oder semantischer Wahrheitsmechanismus. Es meldet deterministische Signale wie
-Buzzword-Dichte, Verwendung vager Phrasen, konkrete Anker, ausführbare
-Handlungen, Wiederholung und übermäßig selbstsichere Claim-Marker.
+`slop4j` ist kein Faktenprüfer oder Grammatik-Framework. Die Bibliothek meldet deterministische linguistische Signale, die mit generischem AI-Output assoziiert werden. Sie sagt Ihnen nicht, ob die KI lügt – nur, ob sie professionell vage bleibt.
