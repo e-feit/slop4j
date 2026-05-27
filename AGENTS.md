@@ -2,43 +2,28 @@
 
 This guide helps future agent sessions understand the non-obvious architecture constraints and guidelines for this repository.
 
-## 1. Tone and Humor (Crucial)
-* **The Joke is the Discrepancty:** `slop4j` is a satirical "AI Output Governance Framework" that uses simple, rule-based heuristics instead of AI.
-* **Keep Code/Docs Overly Serious:** All public APIs, JavaDocs, and the `README.md` must sound ultra-professional, enterprise-grade, and dry.
-* **No Jokes in Code:** Never write jokes, easter eggs, or sarcastic remarks in code comments, commit messages, or PR descriptions. The humor must only emerge from the serious implementation of ridiculous concepts (e.g., `BOARD_APPROVED_SLOP`, `DANGEROUSLY_USEFUL`).
-* **README Language Synchronization:** `README.md` is the primary English README and `README_DE.md` is the German counterpart. Always keep both files strictly synchronized. Any content change in one README must be reflected in the other README in the same change.
+## 1. Core Mandates
+* **Tone (Crucial Satire):** `slop4j` is a satirical "AI Output Governance Framework" using rule-based heuristics. Keep all code, JavaDocs, and public docs ultra-serious and enterprise-grade. No jokes in code.
+* **README Sync:** English (`README.md`) and German (`README_DE.md`) must remain strictly synchronized.
+* **Dependency Minimalism:** `slop4j-core` must remain minimal (SnakeYAML only). No Spring/NLP libraries in core.
+* **Java Version:** Target Java 17 (Records, Sealed classes, Pattern matching).
+* **Nullability:** Use JSpecify (`@NullMarked`, `@Nullable`) with `provided` scope.
 
-## 2. Project Structure & Technical Constraints (Do Not Violate)
-* **Multi-Module Structure:**
-  * `slop4j-bom`: Bill of Materials for external consumers.
-  * `slop4j-core`: The main library containing the analysis logic.
-  * `slop4j-assertj`: Custom AssertJ assertions for Slop4J testing.
-  * `slop4j-maven-plugin`: Maven plugin to analyze and enforce slop rules during the build.
-  * `slop4j-cli`: Command Line Interface for slop analysis.
-  * `slop4j-examples`: Demonstration projects showing how to use the library.
-* **Examples Must Track Module-Level Changes:** When a new Maven module is added, or an existing module receives substantial new functionality or breaking changes, update `slop4j-examples` in the same change. Add or adjust an example module that demonstrates the new or changed public usage. Do not ship major module-level API changes without a corresponding example project unless there is a clearly documented reason.
-* **Examples Must Not Be Published to Maven Central:** Example modules under `slop4j-examples` must be built and tested, but they must not be included in Maven Central publishing bundles. When adding a new example module, add its artifactId to the `central-publish` profile's `central-publishing-maven-plugin` `<excludeArtifacts>` list in the root `pom.xml` in the same change.
-* **CI-Friendly Versioning:** Use `${revision}` for the project version. The actual version is defined in the root `pom.xml` via the `<revision>` property.
-* **Runtime Dependencies:** The `slop4j-core` module must keep runtime dependencies minimal. `org.yaml:snakeyaml` is permitted for YAML dictionary loading. No NLP libraries, no JSON parsers, no Spring. Testing may use JUnit 5 and AssertJ.
-* **JSpecify for Nullability:** Use JSpecify annotations (such as `@NullMarked` and `@Nullable`) to define clear nullability contracts. These must be added with `provided` scope in Maven, ensuring zero runtime footprint.
-* **Code Formatting (Spotless):** All Java files must be formatted using Spotless. Do not manually format or commit unformatted code.
-* **Agent Markdown Artifacts:** When creating Markdown files for agent workflows, such as plans, designs, reviews, or implementation notes, place them under the `.ai/` directory.
-* **Java Version:** Target Java 17. Use modern features like records, sealed classes, pattern matching, and text blocks where appropriate.
-* **API Visibility:** Only classes directly in the `dev.feit.slop4j` package are public (`SlopAnalyzer`, `SlopReport`, etc.). Everything under `dev.feit.slop4j.internal` must be package-private or internal.
-* **Automatic-Module-Name:** `dev.feit.slop4j` must be configured in the Maven build.
+## 2. Technical Map & Docs
+Agents MUST read these before making structural changes:
+- [Architecture Context](docs/architecture/context.md): Technical engine overview.
+- [Module Map](docs/architecture/module-map.md): Dependencies and boundaries.
+- [Runtime & Deployment](docs/architecture/runtime.md): JVM distribution model.
+- [ADRs](docs/adr/README.md): Architecture Decision Records.
 
-## 3. Algorithm & Processing Details (Easy to Miss)
-* **Record Fields:** Do **not** use `Optional` as a field type in records (e.g., in `SlopFinding`). Use empty strings (`""`) to represent missing evidence instead.
-* **Resource Loading:** Dictionaries are loaded from `.yaml` files under `dev/feit/slop4j/lexicon/` using SnakeYAML.
-  * **Normalization:** Dictionary values must be stripped, lowercased using `Locale.ROOT`, and duplicates/empty entries removed upon loading.
-  * **Merge Behavior:** When multiple languages are active, dictionaries are merged. There is no automatic language detection in Step 1.
-* **Tokenizer Regex:** Always use exactly: `Pattern.compile("[\\p{L}\\p{N}][\\p{L}\\p{N}\\-']*")` to correctly tokenise words with hyphens and umlauts.
-* **Sentence Splitting:** Use `text.split("(?<=[.!?])\\s+")`.
-* **Length Gating:** Short texts (under 80 tokens) must not be fully penalized for low evidence, low actionability, or low concreteness. Apply a scaling factor: `lengthFactor = ScoreMath.clamp01(context.tokenCount() / 80.0)` to these penalties.
+## 3. Maintenance Rules
+- **Keep it small:** Documentation must remain highly compressed (< 500 lines).
+- **Update on Change:** Structural changes (new modules, scoring logic shifts) MUST be reflected in `docs/architecture/`.
+- **ADR Policy:** Significant decisions require a new ADR in `docs/adr/YYYY-MM-DD-description.md`.
+- **No Hallucinations:** Explicitly mark missing information as "TBD" or "Unknown".
 
-## 4. Verification Commands & Pre-Push Requirements
-* **Strict Verification:** Before pushing to a remote repository, you MUST ensure that all tests pass AND the code is properly formatted. A push is only permitted if `mvn clean test` and `mvn spotless:check` are green.
-* **No Auto-Commit/Push:** NEVER commit or push changes unless explicitly instructed by the user.
-* **Build and Test:** `mvn clean test`
-* **Format Code:** `mvn spotless:apply`
-* **Verify Formatting:** `mvn spotless:check`
+## 4. Verification Commands
+- **Build & Test:** `mvn clean test`
+- **Format Code:** `mvn spotless:apply`
+- **Check Formatting:** `mvn spotless:check`
+- **Requirement:** Pushes are only allowed if both tests and spotless check pass.
