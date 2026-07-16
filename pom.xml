@@ -50,7 +50,7 @@
         <revision>0.2.2-SNAPSHOT</revision>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.jupiter.version>6.1.1</junit.jupiter.version>
+        <junit.jupiter.version>6.1.2</junit.jupiter.version>
         <assertj.version>3.27.7</assertj.version>
         <google-java-format.version>1.24.0</google-java-format.version>
         <jspecify.version>1.0.0</jspecify.version>
