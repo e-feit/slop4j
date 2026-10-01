@@ -16,7 +16,7 @@ stages:
     policy: pull-push
 
 maven lint:
-  image: maven:3.9-eclipse-temurin-17
+  image: maven:3.10-eclipse-temurin-17
   stage: lint
   <<: *maven_cache
   script:
@@ -25,7 +25,7 @@ maven lint:
     - mvn --batch-mode spotless:check
 
 maven test:
-  image: maven:3.9-eclipse-temurin-17
+  image: maven:3.10-eclipse-temurin-17
   stage: test
   <<: *maven_cache
   coverage: '/Total line coverage:\s*([0-9]+(?:\.[0-9]+)?)%/'
@@ -48,7 +48,7 @@ maven test:
     expire_in: "1 week"
 
 maven package:
-  image: maven:3.9-eclipse-temurin-17
+  image: maven:3.10-eclipse-temurin-17
   stage: package
   <<: *maven_cache
   rules:
@@ -62,7 +62,7 @@ maven package:
     expire_in: "1 week"
 
 maven publish central:
-  image: maven:3.9-eclipse-temurin-17
+  image: maven:3.10-eclipse-temurin-17
   stage: publish
   <<: *maven_cache
   resource_group: maven-central
