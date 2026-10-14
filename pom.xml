@@ -57,7 +57,7 @@
         <maven.version>3.10.0</maven.version>
         <maven-plugin-tools.version>3.16.0</maven-plugin-tools.version>
         <spring.boot.version>4.1.1</spring.boot.version>
-        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.12.0</central-publishing-maven-plugin.version>
         <maven-deploy-plugin.version>3.2.0</maven-deploy-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-shade-plugin.version>3.6.2</maven-shade-plugin.version>
