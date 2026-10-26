@@ -363,8 +363,8 @@
                             <publishingServerId>central</publishingServerId>
                             <deploymentName>slop4j-${project.version}</deploymentName>
                             <outputFilename>slop4j-${project.version}-central-bundle.zip</outputFilename>
-                            <autoPublish>false</autoPublish>
-                            <waitUntil>validated</waitUntil>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
                             <excludeArtifacts>
                                 <excludeArtifact>slop4j-examples</excludeArtifact>
                                 <excludeArtifact>basic-core-usage</excludeArtifact>

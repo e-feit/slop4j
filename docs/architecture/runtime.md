@@ -12,5 +12,5 @@
 
 ## Deployment Process
 1. **CI Pipeline:** Runs `mvn clean verify`.
-2. **Release:** Automated via GPG signing and Sonatype Central Publishing Plugin.
+2. **Release:** A numeric tag on the current default-branch head sets `${revision}` for Maven, signs artifacts, and automatically publishes through the Sonatype Central Publishing Plugin. The job waits for the published state and advances the default branch to the next patch snapshot.
 3. **Artifacts:** Includes `-sources.jar` and `-javadoc.jar` for all public modules.
