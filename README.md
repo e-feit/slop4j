@@ -239,12 +239,14 @@ When multiple languages are active, their dictionaries are merged for the analys
 `slopScore` ranges from `0.0` to `100.0`. Components are normalized from `0.0` to `1.0`:
 
 - `buzzwordDensity`: Frequency of high-value, low-meaning corporate jargon.
-- `vaguePhraseDensity`: Usage of words that reduce narrative precision.
-- `concretenessScore`: Presence of specific details that might limit strategic optionality.
+- `vaguePhraseDensity`: Occurrences of bounded phrases that reduce narrative precision, relative to sentence count.
+- `concretenessScore`: Presence of technical anchors such as commands, file names, versions, and numbers.
 - `actionabilityScore`: Presence of actual executable steps vs. vague aspirations.
-- `evidenceScore`: Presence of supporting claims or data points.
+- `evidenceScore`: Share of sentences containing a citation or measured result; technical anchors alone do not count.
 - `repetitionScore`: Frequency of redundant phrasing.
-- `overconfidenceScore`: Frequency of absolute claims lacking supporting evidence.
+- `overconfidenceScore`: Frequency of absolute claim markers in sentences without a citation or measured result.
+
+These signals are deterministic heuristics. A citation or measurement in the same sentence does not verify a claim.
 
 ## Governance Verdicts
 

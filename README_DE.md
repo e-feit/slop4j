@@ -239,12 +239,14 @@ Bei Aktivierung mehrerer Sprachen werden die entsprechenden Lexika für die Anal
 Der `slopScore` reicht von `0.0` bis `100.0`. Die Einzel-Scores sind zwischen `0.0` und `1.0` normalisiert:
 
 - `buzzwordDensity`: Häufigkeit von wertvollem, aber inhaltsleerem Management-Jargon.
-- `vaguePhraseDensity`: Verwendung von Wörtern, die die narrative Präzision mindern.
-- `concretenessScore`: Vorhandensein spezifischer Details, die die strategische Flexibilität einschränken könnten.
+- `vaguePhraseDensity`: Vorkommen abgegrenzter Phrasen, die die narrative Präzision mindern, relativ zur Satzanzahl.
+- `concretenessScore`: Vorhandensein technischer Anker wie Befehle, Dateinamen, Versionen und Zahlen.
 - `actionabilityScore`: Vorhandensein tatsächlicher Handlungsschritte vs. vager Aspirationen.
-- `evidenceScore`: Vorhandensein von stützenden Belegen oder Datenpunkten.
+- `evidenceScore`: Anteil der Sätze mit Quellenangabe oder Messwert; technische Anker allein zählen nicht.
 - `repetitionScore`: Häufigkeit redundanter Phrasierung.
-- `overconfidenceScore`: Häufigkeit absoluter Behauptungen ohne stützende Belege.
+- `overconfidenceScore`: Häufigkeit absoluter Behauptungsmarker in Sätzen ohne Quellenangabe oder Messwert.
+
+Diese Signale sind deterministische Heuristiken. Eine Quelle oder Messung im selben Satz verifiziert die Behauptung nicht.
 
 ## Governance Verdicts
 
