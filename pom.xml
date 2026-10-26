@@ -15,8 +15,8 @@
 
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>https://opensource.org/license/mit</url>
+            <name>BSD Zero Clause License</name>
+            <url>https://opensource.org/license/0bsd</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
