@@ -23,7 +23,7 @@ Der Fokus liegt exklusiv auf „textuellen Smells“ – Merkmalen generischer P
 ## Installation
 
 <!-- slop4j-installation:start -->
-Aktuelle Version: `0.2.1`.
+Aktuelle Version: `0.3.0`.
 
 ### Core-Bibliothek
 
@@ -31,7 +31,7 @@ Aktuelle Version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-core</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -41,7 +41,7 @@ Aktuelle Version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-assertj</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -52,7 +52,7 @@ Aktuelle Version: `0.2.1`.
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </plugin>
 ```
 
@@ -62,7 +62,7 @@ Aktuelle Version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-spring-boot-starter</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 <!-- slop4j-installation:end -->
@@ -127,7 +127,7 @@ Das `slop4j-maven-plugin` prüft Dokumentationsdateien (READMEs, ADRs etc.) wäh
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.2.1</version><!-- slop4j-release-version -->
+    <version>0.3.0</version><!-- slop4j-release-version -->
     <configuration>
         <maxSlopScore>60.0</maxSlopScore>
         <languages>

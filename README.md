@@ -23,7 +23,7 @@ It focuses exclusively on "textual smells"—markers of generic phrasing that re
 ## Installation
 
 <!-- slop4j-installation:start -->
-Latest version: `0.2.1`.
+Latest version: `0.3.0`.
 
 ### Core Library
 
@@ -31,7 +31,7 @@ Latest version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-core</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -41,7 +41,7 @@ Latest version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-assertj</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -52,7 +52,7 @@ Latest version: `0.2.1`.
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </plugin>
 ```
 
@@ -62,7 +62,7 @@ Latest version: `0.2.1`.
 <dependency>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-spring-boot-starter</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 <!-- slop4j-installation:end -->
@@ -127,7 +127,7 @@ The `slop4j-maven-plugin` audits documentation files during the build process to
 <plugin>
     <groupId>dev.feit</groupId>
     <artifactId>slop4j-maven-plugin</artifactId>
-    <version>0.2.1</version><!-- slop4j-release-version -->
+    <version>0.3.0</version><!-- slop4j-release-version -->
     <configuration>
         <maxSlopScore>60.0</maxSlopScore>
         <languages>
