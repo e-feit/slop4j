@@ -87,6 +87,15 @@ class SlopReportAssertTest {
 	}
 
 	@Test
+	void evidenceAloneDoesNotCountAsImplementationDetail() {
+		SlopReport citedButAbstract = report(20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, SlopVerdict.CLEAN);
+
+		assertThat(citedButAbstract).lacksConcreteDetails().containsNoImplementationDetails();
+		assertThatThrownBy(() -> assertThat(citedButAbstract).containsConcreteDetails())
+				.isInstanceOf(AssertionError.class);
+	}
+
+	@Test
 	void nullReportFailsAtAssertionTime() {
 		assertThatThrownBy(() -> assertThat((SlopReport) null).hasSlopScoreBelow(40.0))
 				.isInstanceOf(AssertionError.class).hasMessageContaining("Expecting actual not to be null");

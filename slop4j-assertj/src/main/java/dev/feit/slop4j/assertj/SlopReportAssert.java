@@ -195,26 +195,20 @@ public final class SlopReportAssert extends AbstractAssert<SlopReportAssert, Slo
 		return this;
 	}
 
-	/**
-	 * Requires concreteness score above {@code 0.5} or evidence score above
-	 * {@code 0.5}.
-	 */
+	/** Requires concreteness score above {@code 0.5}. */
 	public SlopReportAssert containsConcreteDetails() {
 		SlopReport report = requireReport();
-		if (!(report.concretenessScore() > 0.5 || report.evidenceScore() > 0.5)) {
-			failWithMessage(
-					"Expected concrete details through concreteness score above 0.5 or evidence score above 0.5.%n%n%s",
-					formatReport(report));
+		if (report.concretenessScore() <= 0.5) {
+			failWithMessage("Expected concreteness score above 0.5.%n%n%s", formatReport(report));
 		}
 		return this;
 	}
 
-	/** Requires concreteness and evidence score below {@code 0.25}. */
+	/** Requires concreteness score below {@code 0.25}. */
 	public SlopReportAssert lacksConcreteDetails() {
 		SlopReport report = requireReport();
-		if (!(report.concretenessScore() < 0.25 && report.evidenceScore() < 0.25)) {
-			failWithMessage("Expected concreteness score and evidence score to be below 0.25.%n%n%s",
-					formatReport(report));
+		if (report.concretenessScore() >= 0.25) {
+			failWithMessage("Expected concreteness score below 0.25.%n%n%s", formatReport(report));
 		}
 		return this;
 	}
@@ -303,15 +297,11 @@ public final class SlopReportAssert extends AbstractAssert<SlopReportAssert, Slo
 		return this;
 	}
 
-	/**
-	 * Requires evidence score below {@code 0.2} and concreteness score below
-	 * {@code 0.3}.
-	 */
+	/** Requires concreteness score below {@code 0.3}. */
 	public SlopReportAssert containsNoImplementationDetails() {
 		SlopReport report = requireReport();
-		if (!(report.evidenceScore() < 0.2 && report.concretenessScore() < 0.3)) {
-			failWithMessage("Expected evidence score below 0.2 and concreteness score below 0.3.%n%n%s",
-					formatReport(report));
+		if (report.concretenessScore() >= 0.3) {
+			failWithMessage("Expected concreteness score below 0.3.%n%n%s", formatReport(report));
 		}
 		return this;
 	}
