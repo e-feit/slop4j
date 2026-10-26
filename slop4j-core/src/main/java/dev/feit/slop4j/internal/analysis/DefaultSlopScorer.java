@@ -38,10 +38,9 @@ final class DefaultSlopScorer {
 		double vagueScore = ScoreMath.saturating(vaguePhraseDensity, 1.5);
 		double abstractScore = ScoreMath.saturating(abstractNounDensity, 0.07);
 		double lengthFactor = ScoreMath.clamp01(context.tokenCount() / 80.0);
-		double adjustedOverconfidence = overconfidenceScore * (1.0 - evidenceScore);
 
 		double rawSlop = 0.24 * buzzwordScore + 0.18 * vagueScore + 0.14 * abstractScore + 0.10 * repetitionScore
-				+ 0.12 * adjustedOverconfidence + lengthFactor * (0.08 * (1.0 - evidenceScore)
+				+ 0.12 * overconfidenceScore + lengthFactor * (0.08 * (1.0 - evidenceScore)
 						+ 0.07 * (1.0 - actionabilityScore) + 0.07 * (1.0 - concretenessScore));
 
 		double slopScore = ScoreMath.round1(Math.min(1.0, rawSlop * 1.5) * 100.0);

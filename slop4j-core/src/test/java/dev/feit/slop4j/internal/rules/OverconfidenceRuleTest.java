@@ -19,4 +19,26 @@ class OverconfidenceRuleTest {
 		assertThat(result.overconfidenceScore()).isGreaterThan(0.0);
 		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.OVERCONFIDENCE);
 	}
+
+	@Test
+	void evidenceInAnotherSentenceDoesNotSupportAnAbsoluteClaim() {
+		SlopRule.Result result = analyze(
+				"This always succeeds and is guaranteed. The unrelated run processed 95% of requests.");
+
+		assertThat(result.overconfidenceScore()).isGreaterThan(0.0);
+		assertThat(result.findings()).extracting(finding -> finding.type()).contains(SlopFindingType.OVERCONFIDENCE);
+	}
+
+	@Test
+	void measuredResultInSameSentenceSupportsClaim() {
+		SlopRule.Result result = analyze("This always succeeds and is guaranteed in 95% of 200 tests.");
+
+		assertThat(result.overconfidenceScore()).isZero();
+		assertThat(result.findings()).isEmpty();
+	}
+
+	private static SlopRule.Result analyze(String text) {
+		return new OverconfidenceRule()
+				.analyze(SlopContext.create(text, new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
+	}
 }
