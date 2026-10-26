@@ -17,7 +17,8 @@ class SlopAnalyzerTest {
 
 		assertThat(report.slopScore()).isLessThanOrEqualTo(30.0);
 		assertThat(report.verdict()).isIn(SlopVerdict.CLEAN, SlopVerdict.DANGEROUSLY_USEFUL);
-		assertThat(report.evidenceScore()).isGreaterThan(0.5);
+		assertThat(report.evidenceScore()).isZero();
+		assertThat(report.concretenessScore()).isGreaterThan(0.5);
 		assertThat(report.actionabilityScore()).isGreaterThan(0.3);
 	}
 
@@ -83,5 +84,15 @@ class SlopAnalyzerTest {
 
 		assertThat(report.slopScore()).isZero();
 		assertThat(report.findings()).isEmpty();
+	}
+
+	@Test
+	void unrelatedMeasuredResultDoesNotChangeUnsupportedClaimVerdict() {
+		SlopReport report = SlopAnalyzer.builder().build()
+				.analyze("Always guaranteed. We observed 95% of requests passed.");
+
+		assertThat(report.evidenceScore()).isEqualTo(0.5);
+		assertThat(report.overconfidenceScore()).isEqualTo(1.0);
+		assertThat(report.verdict()).isEqualTo(SlopVerdict.BRAIN_FREE_ZONE);
 	}
 }

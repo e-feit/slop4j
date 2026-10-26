@@ -27,7 +27,7 @@ public final class TextTokenizer {
 		if (stripped.isEmpty()) {
 			return List.of();
 		}
-		String[] parts = stripped.split("(?<=[.!?])\\s+");
+		String[] parts = stripped.split("(?<=[.!?])\\s+|\\R+");
 		List<String> sentences = new ArrayList<>();
 		for (String part : parts) {
 			String sentence = part.strip();

@@ -5,6 +5,7 @@ import dev.feit.slop4j.SlopFinding;
 import dev.feit.slop4j.SlopFindingType;
 import dev.feit.slop4j.internal.ScoreMath;
 import dev.feit.slop4j.internal.SlopContext;
+import dev.feit.slop4j.internal.TextTokenizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,13 @@ public final class OverconfidenceRule implements SlopRule {
 	@Override
 	public Result analyze(SlopContext context, int maxFindingEvidenceLength) {
 		List<String> hits = new ArrayList<>();
-		for (String token : context.tokens()) {
-			if (context.dictionaries().claimMarkers().contains(token)) {
-				hits.add(token);
+		for (String sentence : context.sentences()) {
+			if (!EvidenceSignals.hasSupport(sentence)) {
+				for (String token : TextTokenizer.tokens(sentence)) {
+					if (context.dictionaries().claimMarkers().contains(token)) {
+						hits.add(token);
+					}
+				}
 			}
 		}
 

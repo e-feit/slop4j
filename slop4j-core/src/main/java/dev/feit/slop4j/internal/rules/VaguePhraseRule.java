@@ -7,6 +7,8 @@ import dev.feit.slop4j.internal.ScoreMath;
 import dev.feit.slop4j.internal.SlopContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class VaguePhraseRule implements SlopRule {
 
@@ -14,7 +16,10 @@ public final class VaguePhraseRule implements SlopRule {
 	public Result analyze(SlopContext context, int maxFindingEvidenceLength) {
 		List<String> hits = new ArrayList<>();
 		for (String phrase : context.dictionaries().vaguePhrases()) {
-			if (context.normalizedText().contains(phrase)) {
+			Pattern pattern = Pattern.compile(
+					"(?<![\\p{L}\\p{N}\\p{M}\\p{Pc}])" + Pattern.quote(phrase) + "(?![\\p{L}\\p{N}\\p{M}\\p{Pc}])");
+			Matcher matcher = pattern.matcher(context.normalizedText());
+			while (matcher.find()) {
 				hits.add(phrase);
 			}
 		}

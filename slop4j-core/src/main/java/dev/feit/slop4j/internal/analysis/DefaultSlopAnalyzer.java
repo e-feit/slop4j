@@ -11,6 +11,7 @@ import dev.feit.slop4j.internal.rules.AbstractNounRule;
 import dev.feit.slop4j.internal.rules.ActionabilityRule;
 import dev.feit.slop4j.internal.rules.BuzzwordRule;
 import dev.feit.slop4j.internal.rules.ConcreteAnchorRule;
+import dev.feit.slop4j.internal.rules.EvidenceRule;
 import dev.feit.slop4j.internal.rules.OverconfidenceRule;
 import dev.feit.slop4j.internal.rules.RepetitionRule;
 import dev.feit.slop4j.internal.rules.SlopRule;
@@ -37,7 +38,8 @@ public final class DefaultSlopAnalyzer implements SlopAnalyzer {
 		this.maxFindingEvidenceLength = maxFindingEvidenceLength;
 		this.dictionarySet = Objects.requireNonNull(dictionarySet, "dictionarySet");
 		this.rules = List.of(new BuzzwordRule(), new VaguePhraseRule(), new AbstractNounRule(),
-				new ConcreteAnchorRule(), new ActionabilityRule(), new RepetitionRule(), new OverconfidenceRule());
+				new ConcreteAnchorRule(), new EvidenceRule(), new ActionabilityRule(), new RepetitionRule(),
+				new OverconfidenceRule());
 	}
 
 	@Override

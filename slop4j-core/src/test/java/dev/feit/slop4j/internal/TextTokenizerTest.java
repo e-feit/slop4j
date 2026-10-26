@@ -19,4 +19,10 @@ class TextTokenizerTest {
 		assertThat(TextTokenizer.sentences("One sentence. Two sentences! Three?")).containsExactly("One sentence.",
 				"Two sentences!", "Three?");
 	}
+
+	@Test
+	void splitsSeparateListLinesWithoutTerminalPunctuation() {
+		assertThat(TextTokenizer.sentences("- Always guaranteed\n- We observed 95% of requests passed"))
+				.containsExactly("- Always guaranteed", "- We observed 95% of requests passed");
+	}
 }

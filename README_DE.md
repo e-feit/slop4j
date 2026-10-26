@@ -239,12 +239,14 @@ Bei Aktivierung mehrerer Sprachen werden die entsprechenden Lexika für die Anal
 Der `slopScore` reicht von `0.0` bis `100.0`. Die Einzel-Scores sind zwischen `0.0` und `1.0` normalisiert:
 
 - `buzzwordDensity`: Häufigkeit von wertvollem, aber inhaltsleerem Management-Jargon.
-- `vaguePhraseDensity`: Verwendung von Wörtern, die die narrative Präzision mindern.
-- `concretenessScore`: Vorhandensein spezifischer Details, die die strategische Flexibilität einschränken könnten.
+- `vaguePhraseDensity`: Vorkommen abgegrenzter Phrasen, die die narrative Präzision mindern, relativ zur Satzanzahl.
+- `concretenessScore`: Vorhandensein technischer Anker wie Befehle, Dateinamen, Versionen und Zahlen.
 - `actionabilityScore`: Vorhandensein tatsächlicher Handlungsschritte vs. vager Aspirationen.
-- `evidenceScore`: Vorhandensein von stützenden Belegen oder Datenpunkten.
+- `evidenceScore`: Anteil der Sätze mit Quellenangabe oder quantifiziertem Ergebnis samt Beobachtungssprache; technische Anker und bloße Zahlenversprechen zählen nicht.
 - `repetitionScore`: Häufigkeit redundanter Phrasierung.
-- `overconfidenceScore`: Häufigkeit absoluter Behauptungen ohne stützende Belege.
+- `overconfidenceScore`: Häufigkeit absoluter Behauptungsmarker in Sätzen ohne Quellenangabe oder quantifiziertes, beobachtetes Ergebnis. Zeilenumbrüche trennen Sätze.
+
+Diese Signale sind deterministische Heuristiken. Eine Quelle oder Messung im selben Satz verifiziert die Behauptung nicht.
 
 ## Governance Verdicts
 
@@ -258,7 +260,7 @@ Der `slopScore` reicht von `0.0` bis `100.0`. Die Einzel-Scores sind zwischen `0
 - `GARBAGE_IN_SLOP_OUT`: Ergebnis einer direkten, ungefilterten Prompt-to-Output-Pipeline.
 - `CERTIFIED_BRAINLESS_SLOP`: Der absolute Gipfel inhaltleerer Existenz.
 - `DANGEROUSLY_USEFUL`: Niedriger Slop kombiniert mit hoher Konkretheit und Handlungsorientierung.
-- `BRAIN_FREE_ZONE`: Extreme Selbstsicherheit bei nahezu null Belegen; Merkmal fortgeschrittener stochastischer Halluzination.
+- `BRAIN_FREE_ZONE`: Extreme Häufung unbelegter absoluter Behauptungen; Merkmal fortgeschrittener stochastischer Halluzination.
 
 ## Grenzen
 

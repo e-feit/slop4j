@@ -38,22 +38,20 @@ final class DefaultSlopScorer {
 		double vagueScore = ScoreMath.saturating(vaguePhraseDensity, 1.5);
 		double abstractScore = ScoreMath.saturating(abstractNounDensity, 0.07);
 		double lengthFactor = ScoreMath.clamp01(context.tokenCount() / 80.0);
-		double adjustedOverconfidence = overconfidenceScore * (1.0 - evidenceScore);
 
 		double rawSlop = 0.24 * buzzwordScore + 0.18 * vagueScore + 0.14 * abstractScore + 0.10 * repetitionScore
-				+ 0.12 * adjustedOverconfidence + lengthFactor * (0.08 * (1.0 - evidenceScore)
+				+ 0.12 * overconfidenceScore + lengthFactor * (0.08 * (1.0 - evidenceScore)
 						+ 0.07 * (1.0 - actionabilityScore) + 0.07 * (1.0 - concretenessScore));
 
 		double slopScore = ScoreMath.round1(Math.min(1.0, rawSlop * 1.5) * 100.0);
 		return new SlopReport(slopScore, buzzwordDensity, vaguePhraseDensity, concretenessScore, actionabilityScore,
 				evidenceScore, repetitionScore, overconfidenceScore,
-				verdict(slopScore, concretenessScore, actionabilityScore, overconfidenceScore, evidenceScore),
-				findings);
+				verdict(slopScore, concretenessScore, actionabilityScore, overconfidenceScore), findings);
 	}
 
 	private static SlopVerdict verdict(double slopScore, double concretenessScore, double actionabilityScore,
-			double overconfidenceScore, double evidenceScore) {
-		if (overconfidenceScore > 0.85 && evidenceScore < 0.1) {
+			double overconfidenceScore) {
+		if (overconfidenceScore > 0.85) {
 			return SlopVerdict.BRAIN_FREE_ZONE;
 		}
 		if (slopScore < 25.0 && concretenessScore > 0.7 && actionabilityScore > 0.5) {

@@ -239,12 +239,14 @@ When multiple languages are active, their dictionaries are merged for the analys
 `slopScore` ranges from `0.0` to `100.0`. Components are normalized from `0.0` to `1.0`:
 
 - `buzzwordDensity`: Frequency of high-value, low-meaning corporate jargon.
-- `vaguePhraseDensity`: Usage of words that reduce narrative precision.
-- `concretenessScore`: Presence of specific details that might limit strategic optionality.
+- `vaguePhraseDensity`: Occurrences of bounded phrases that reduce narrative precision, relative to sentence count.
+- `concretenessScore`: Presence of technical anchors such as commands, file names, versions, and numbers.
 - `actionabilityScore`: Presence of actual executable steps vs. vague aspirations.
-- `evidenceScore`: Presence of supporting claims or data points.
+- `evidenceScore`: Share of sentences containing a citation or a quantified result with observation language; technical anchors and numerical promises alone do not count.
 - `repetitionScore`: Frequency of redundant phrasing.
-- `overconfidenceScore`: Frequency of absolute claims lacking supporting evidence.
+- `overconfidenceScore`: Frequency of absolute claim markers in sentences without a citation or quantified observed result. Line breaks delimit sentences.
+
+These signals are deterministic heuristics. A citation or measurement in the same sentence does not verify a claim.
 
 ## Governance Verdicts
 
@@ -258,7 +260,7 @@ When multiple languages are active, their dictionaries are merged for the analys
 - `GARBAGE_IN_SLOP_OUT`: Result of a direct, unfiltered prompt-to-output pipeline.
 - `CERTIFIED_BRAINLESS_SLOP`: The ultimate peak of content-free existence.
 - `DANGEROUSLY_USEFUL`: Low slop combined with high concreteness and actionability.
-- `BRAIN_FREE_ZONE`: High confidence combined with near-zero evidence; hallmark of advanced stochastic hallucination.
+- `BRAIN_FREE_ZONE`: Extreme concentration of unsupported absolute claims; hallmark of advanced stochastic hallucination.
 
 ## Limitations
 
