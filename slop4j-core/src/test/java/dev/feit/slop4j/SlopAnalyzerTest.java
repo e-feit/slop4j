@@ -17,7 +17,8 @@ class SlopAnalyzerTest {
 
 		assertThat(report.slopScore()).isLessThanOrEqualTo(30.0);
 		assertThat(report.verdict()).isIn(SlopVerdict.CLEAN, SlopVerdict.DANGEROUSLY_USEFUL);
-		assertThat(report.evidenceScore()).isGreaterThan(0.5);
+		assertThat(report.evidenceScore()).isZero();
+		assertThat(report.concretenessScore()).isGreaterThan(0.5);
 		assertThat(report.actionabilityScore()).isGreaterThan(0.3);
 	}
 

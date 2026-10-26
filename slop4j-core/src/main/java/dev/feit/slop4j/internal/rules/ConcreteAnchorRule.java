@@ -42,20 +42,17 @@ public final class ConcreteAnchorRule implements SlopRule {
 			}
 		}
 
-		double evidenceScore = Math.min(1.0, weightedHits / 10.0);
-		double concretenessScore = evidenceScore;
+		double concretenessScore = Math.min(1.0, weightedHits / 10.0);
 		List<SlopFinding> findings = new ArrayList<>();
-		if (context.tokenCount() >= 80 && evidenceScore < 0.2) {
-			findings.add(new SlopFinding(SlopFindingType.LOW_EVIDENCE, Severity.WARNING,
-					"Text contains few concrete anchors such as numbers, versions, commands or file names.", ""));
+		if (context.tokenCount() >= 80 && concretenessScore < 0.2) {
 			findings.add(new SlopFinding(SlopFindingType.LOW_CONCRETENESS, Severity.WARNING,
 					"Text provides limited concrete implementation detail.", ""));
-		} else if (context.tokenCount() >= 20 && evidenceScore < 0.2) {
+		} else if (context.tokenCount() >= 20 && concretenessScore < 0.2) {
 			findings.add(new SlopFinding(SlopFindingType.LOW_CONCRETENESS, Severity.INFO,
 					"Text provides limited concrete implementation detail.", ""));
 		}
 
-		return new Result(0.0, 0.0, 0.0, concretenessScore, 0.0, evidenceScore, 0.0, 0.0, findings);
+		return new Result(0.0, 0.0, 0.0, concretenessScore, 0.0, 0.0, 0.0, 0.0, findings);
 	}
 
 	private static double collect(String text, Pattern pattern, double weight, List<String> anchors) {

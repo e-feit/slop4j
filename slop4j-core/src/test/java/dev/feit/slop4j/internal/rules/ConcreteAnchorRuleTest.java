@@ -17,7 +17,7 @@ class ConcreteAnchorRuleTest {
 				Call validateRequest(input).
 				""", new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);
 
-		assertThat(result.evidenceScore()).isGreaterThan(0.7);
+		assertThat(result.evidenceScore()).isZero();
 		assertThat(result.concretenessScore()).isGreaterThan(0.7);
 	}
 }
