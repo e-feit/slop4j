@@ -37,6 +37,14 @@ class VaguePhraseRuleTest {
 		assertThat(result.findings()).isEmpty();
 	}
 
+	@Test
+	void doesNotMatchPhrasesInsideIdentifiersOrBeforeCombiningMarks() {
+		SlopRule.Result result = analyze("typically_enabled typically_disabled typically\u0301");
+
+		assertThat(result.vaguePhraseDensity()).isZero();
+		assertThat(result.findings()).isEmpty();
+	}
+
 	private static SlopRule.Result analyze(String text) {
 		return new VaguePhraseRule()
 				.analyze(SlopContext.create(text, new ResourceDictionaryLoader().load(Language.ENGLISH)), 120);

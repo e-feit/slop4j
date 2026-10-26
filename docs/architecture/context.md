@@ -4,12 +4,12 @@
 `slop4j` is a deterministic scoring engine for text "slop" (generic AI-generated output). It replaces stochastic AI models with fast, rule-based heuristics.
 
 ## Core Engine (slop4j-core)
-- **Tokenization:** Regex-based (`[\\p{L}\\p{N}][\\p{L}\\p{N}\\-']*`); sentence splitting supports local claim analysis.
+- **Tokenization:** Regex-based (`[\\p{L}\\p{N}][\\p{L}\\p{N}\\-']*`); punctuation and line breaks delimit local claim analysis.
 - **Lexicon:** YAML-based dictionaries under `dev/feit/slop4j/lexicon/`.
 - **Scoring Logic:**
     - **Heuristic Rules:** Actionability, Buzzwords, Overconfidence, Repetition, Vague Phrases, Concrete Anchors, Evidence.
     - **Phrase Matches:** Vague phrases use Unicode word boundaries and count each occurrence.
-    - **Claim Support:** Absolute claim markers are penalized only when their sentence lacks a citation or measured result.
+    - **Claim Support:** Absolute claim markers are penalized only when their sentence lacks a citation or a quantified result with observation language.
     - **Distinct Signals:** Technical anchors determine concreteness; cited sources and measured results determine evidence.
     - **Length Gating:** Missing evidence, actionability, and concreteness penalties are scaled for texts < 80 tokens.
     - **Scoring Factor:** `context.tokenCount() / 80.0` (clamped 0-1).

@@ -242,9 +242,9 @@ When multiple languages are active, their dictionaries are merged for the analys
 - `vaguePhraseDensity`: Occurrences of bounded phrases that reduce narrative precision, relative to sentence count.
 - `concretenessScore`: Presence of technical anchors such as commands, file names, versions, and numbers.
 - `actionabilityScore`: Presence of actual executable steps vs. vague aspirations.
-- `evidenceScore`: Share of sentences containing a citation or measured result; technical anchors alone do not count.
+- `evidenceScore`: Share of sentences containing a citation or a quantified result with observation language; technical anchors and numerical promises alone do not count.
 - `repetitionScore`: Frequency of redundant phrasing.
-- `overconfidenceScore`: Frequency of absolute claim markers in sentences without a citation or measured result.
+- `overconfidenceScore`: Frequency of absolute claim markers in sentences without a citation or quantified observed result. Line breaks delimit sentences.
 
 These signals are deterministic heuristics. A citation or measurement in the same sentence does not verify a claim.
 
@@ -260,7 +260,7 @@ These signals are deterministic heuristics. A citation or measurement in the sam
 - `GARBAGE_IN_SLOP_OUT`: Result of a direct, unfiltered prompt-to-output pipeline.
 - `CERTIFIED_BRAINLESS_SLOP`: The ultimate peak of content-free existence.
 - `DANGEROUSLY_USEFUL`: Low slop combined with high concreteness and actionability.
-- `BRAIN_FREE_ZONE`: High confidence combined with near-zero evidence; hallmark of advanced stochastic hallucination.
+- `BRAIN_FREE_ZONE`: Extreme concentration of unsupported absolute claims; hallmark of advanced stochastic hallucination.
 
 ## Limitations
 

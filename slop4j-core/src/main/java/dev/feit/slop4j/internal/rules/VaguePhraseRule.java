@@ -16,7 +16,8 @@ public final class VaguePhraseRule implements SlopRule {
 	public Result analyze(SlopContext context, int maxFindingEvidenceLength) {
 		List<String> hits = new ArrayList<>();
 		for (String phrase : context.dictionaries().vaguePhrases()) {
-			Pattern pattern = Pattern.compile("(?<![\\p{L}\\p{N}])" + Pattern.quote(phrase) + "(?![\\p{L}\\p{N}])");
+			Pattern pattern = Pattern.compile(
+					"(?<![\\p{L}\\p{N}\\p{M}\\p{Pc}])" + Pattern.quote(phrase) + "(?![\\p{L}\\p{N}\\p{M}\\p{Pc}])");
 			Matcher matcher = pattern.matcher(context.normalizedText());
 			while (matcher.find()) {
 				hits.add(phrase);

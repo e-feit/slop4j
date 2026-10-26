@@ -8,7 +8,7 @@ The initial scorer used technical anchors for both concreteness and evidence. A 
 
 ## Decision
 
-Keep deterministic rules in `slop4j-core`. Count bounded occurrences of vague phrases. Evaluate absolute claim markers within each sentence and treat citations or measured results in that sentence as support signals. Derive concreteness from technical anchors and evidence from the share of sentences containing support signals. The scorer no longer reduces the overconfidence penalty using document-wide evidence.
+Keep deterministic rules in `slop4j-core`. Count bounded occurrences of vague phrases. Delimit sentences at punctuation and line breaks. Evaluate absolute claim markers within each sentence and treat citations or quantified results with observation language in that sentence as support signals. Derive concreteness from technical anchors and evidence from the share of sentences containing support signals. The scorer and special verdicts no longer reduce overconfidence using document-wide evidence.
 
 ## Consequences
 

@@ -242,9 +242,9 @@ Der `slopScore` reicht von `0.0` bis `100.0`. Die Einzel-Scores sind zwischen `0
 - `vaguePhraseDensity`: Vorkommen abgegrenzter Phrasen, die die narrative Präzision mindern, relativ zur Satzanzahl.
 - `concretenessScore`: Vorhandensein technischer Anker wie Befehle, Dateinamen, Versionen und Zahlen.
 - `actionabilityScore`: Vorhandensein tatsächlicher Handlungsschritte vs. vager Aspirationen.
-- `evidenceScore`: Anteil der Sätze mit Quellenangabe oder Messwert; technische Anker allein zählen nicht.
+- `evidenceScore`: Anteil der Sätze mit Quellenangabe oder quantifiziertem Ergebnis samt Beobachtungssprache; technische Anker und bloße Zahlenversprechen zählen nicht.
 - `repetitionScore`: Häufigkeit redundanter Phrasierung.
-- `overconfidenceScore`: Häufigkeit absoluter Behauptungsmarker in Sätzen ohne Quellenangabe oder Messwert.
+- `overconfidenceScore`: Häufigkeit absoluter Behauptungsmarker in Sätzen ohne Quellenangabe oder quantifiziertes, beobachtetes Ergebnis. Zeilenumbrüche trennen Sätze.
 
 Diese Signale sind deterministische Heuristiken. Eine Quelle oder Messung im selben Satz verifiziert die Behauptung nicht.
 
@@ -260,7 +260,7 @@ Diese Signale sind deterministische Heuristiken. Eine Quelle oder Messung im sel
 - `GARBAGE_IN_SLOP_OUT`: Ergebnis einer direkten, ungefilterten Prompt-to-Output-Pipeline.
 - `CERTIFIED_BRAINLESS_SLOP`: Der absolute Gipfel inhaltleerer Existenz.
 - `DANGEROUSLY_USEFUL`: Niedriger Slop kombiniert mit hoher Konkretheit und Handlungsorientierung.
-- `BRAIN_FREE_ZONE`: Extreme Selbstsicherheit bei nahezu null Belegen; Merkmal fortgeschrittener stochastischer Halluzination.
+- `BRAIN_FREE_ZONE`: Extreme Häufung unbelegter absoluter Behauptungen; Merkmal fortgeschrittener stochastischer Halluzination.
 
 ## Grenzen
 

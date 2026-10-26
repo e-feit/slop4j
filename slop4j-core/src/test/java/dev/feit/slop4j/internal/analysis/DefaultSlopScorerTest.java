@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import dev.feit.slop4j.Language;
 import dev.feit.slop4j.SlopReport;
+import dev.feit.slop4j.SlopVerdict;
 import dev.feit.slop4j.internal.SlopContext;
 import dev.feit.slop4j.internal.dictionary.ResourceDictionaryLoader;
 import dev.feit.slop4j.internal.rules.SlopRule;
@@ -23,5 +24,17 @@ class DefaultSlopScorerTest {
 		SlopReport withEvidence = scorer.score(context, List.of(unsupportedClaim, unrelatedEvidence));
 
 		assertThat(withEvidence.slopScore()).isEqualTo(withoutEvidence.slopScore());
+	}
+
+	@Test
+	void unrelatedEvidenceDoesNotChangeUnsupportedClaimVerdict() {
+		SlopContext context = SlopContext.create("Always guaranteed. The run measured 95% of requests.",
+				new ResourceDictionaryLoader().load(Language.ENGLISH));
+		SlopRule.Result unsupportedClaim = new SlopRule.Result(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, List.of());
+		SlopRule.Result unrelatedEvidence = new SlopRule.Result(0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, List.of());
+
+		SlopReport report = new DefaultSlopScorer().score(context, List.of(unsupportedClaim, unrelatedEvidence));
+
+		assertThat(report.verdict()).isEqualTo(SlopVerdict.BRAIN_FREE_ZONE);
 	}
 }
